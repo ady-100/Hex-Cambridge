@@ -13,3 +13,4 @@ Our project aims to help people identify ethical businesses in their area.
 
 * Dynamic ethical scoring algorithm
 * Research-driven ethical considerations
+* Easy and quick to use for small businesses and consumers
