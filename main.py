@@ -3,6 +3,8 @@ import datetime
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
+import os
+import pymysql
 
 from helpers import apology, login_required
 
