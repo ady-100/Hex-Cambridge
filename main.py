@@ -2,9 +2,11 @@ import datetime
 
 from flask import Flask, render_template
 
+
+# Configure application
 app = Flask(__name__)
 
-
+# The homepage
 @app.route('/')
 def root():
     # For the sake of example, use static information to inflate the template.
@@ -15,6 +17,13 @@ def root():
                    ]
 
     return render_template('index.html', times=dummy_times)
+
+# The about page
+@app.route("/about")
+def about():
+    """Show about us section"""
+ 
+    return render_template("about.html")
 
 
 if __name__ == '__main__':
