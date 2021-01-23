@@ -34,6 +34,7 @@ def test_form():
 def data():
     # get data from the test HTML form, at URL /test_form, sending data to /data, with name="form_name"
     # how to display/do something useful with this?
+    print("This is the python output of the form you just filled in. Will make it so it doesn't automatically go to this page")
     return request.form['form_name']
     
 
