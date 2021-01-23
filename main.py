@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, render_template, redirect, request, session, jsonify
+from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
 
@@ -18,6 +18,15 @@ app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+
+# Ensure responses aren't cached
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
+
 # The homepage
 @app.route('/')
 def root():
@@ -27,7 +36,6 @@ def root():
                    datetime.datetime(2018, 1, 2, 10, 30, 0),
                    datetime.datetime(2018, 1, 3, 11, 0, 0),
                    ]
-
     return render_template('index.html', times=dummy_times)
 
 # The about page
@@ -62,17 +70,16 @@ def login():
 
         # Query database for username
         rows = c.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = rows.fetchall()
         
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(rows[0][1], request.form.get("password")):
             return apology("invalid username and/or password", 403)
-        
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
         
         # Redirect user to home page
         conn.commit()
         conn.close()
+        session["loggedin"] = True
         return redirect("/")
 
 # User reached route via GET (as by clicking a link or via redirect)
@@ -91,6 +98,7 @@ def logout():
     session.clear()
     
     # Redirect user to login form
+    loggedin = False
     return redirect("/")
 
 # Register
@@ -107,7 +115,6 @@ def register():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        
         # Ensure username was submitted
         if not request.form.get("username"):
             return apology("must provide username", 400)
@@ -123,6 +130,7 @@ def register():
         # Query database for username
         username = request.form.get("username")
         rows = c.execute("SELECT * FROM users WHERE username = ?", username)
+        rows = rows.fetchall()
 
         # Ensure username is not taken
         if len(rows) != 0:
@@ -132,7 +140,7 @@ def register():
         password_hash = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
 
         # Add user to database
-        c.execute("INSERT INTO users ('username', 'hash') VALUES (?,?)", username, password_hash)
+        c.execute("INSERT INTO users ('username', 'hash') VALUES (?,?)", (username, password_hash))
 
         # Save commit
         conn.commit()
@@ -157,6 +165,7 @@ def check():
     
     username = request.args.get("username",'')
     rows = c.execute("SELECT * FROM users WHERE username = :name", name=username)
+    rows = rows.fetchall()
     
     # Save commit
     conn.commit()

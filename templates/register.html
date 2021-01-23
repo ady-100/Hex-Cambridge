@@ -7,34 +7,7 @@
 {% block main %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
 
-$('document').ready(function() {
-    $('form').on('submit', function(event) {
-        event.preventDefault();
-        var check;
-        var tester;
-        let input = document.querySelector('input');
-
-        $.get('/check?username=' + input.value, function(data) {
-            console.log("Checked");
-
-            if(!data){
-                alert('Username is taken');
-                console.log("Taken");
-                document.getElementById('register').reset();
-                //tester = 0;
-            }
-            else if (data){
-                document.getElementById("register").submit();
-                console.log("Free");
-                //tester = 1;
-            }
-        });
-    });
-});
-
-</script>
 
     <form action="/register" method="post" id="register">
         <div class="form-group">
