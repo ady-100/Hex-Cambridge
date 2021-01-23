@@ -11,3 +11,9 @@ handlers:
   # the entire handlers section) when there are no static files defined.
 - url: /.*
   script: auto
+
+env_variables:
+  CLOUD_SQL_USERNAME: root
+  CLOUD_SQL_PASSWORD: a
+  CLOUD_SQL_DATABASE_NAME: db_demo
+  CLOUD_SQL_CONNECTION_NAME: hex-cambridge:europe-west2:userlogin
