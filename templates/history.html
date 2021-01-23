@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Product List
+{% endblock %}
+
+{% block main %}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Number</th>
+            <th scope="col">Source Locations</th>
+            <th scope="col">Date and Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in history_list %}
+        <tr>
+            <td>{{item['symbol']}}</td>
+            <td>{{item['price']}}</td>
+            <td>{{item['number']}}</td>
+            <td>{{item['type']}}</td>
+            <td>{{item['datetime']}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
