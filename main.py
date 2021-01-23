@@ -3,8 +3,6 @@ import datetime
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
-import os
-import pymysql
 
 from helpers import apology, login_required
 
@@ -12,22 +10,6 @@ from helpers import apology, login_required
 app = Flask(__name__)
 
 # Set up SQL database
-db_user = os.environ.get('CLOUD_SQL_USERNAME')
-db_password = os.environ.get('CLOUD_SQL_PASSWORD')
-db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
-db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
-def open_connection():
-    unix_socket = '/cloudsql/{}'.format(db_connection_name)
-    try:
-        if os.environ.get('GAE_ENV') == 'standard':
-            conn = pymysql.connect(user=db_user, password=db_password,
-                                unix_socket=unix_socket, db=db_name,
-                                cursorclass=pymysql.cursors.DictCursor
-                                )
-    except pymysql.MySQLError as e:
-        print(e)
-
-    return conn
 
 # Create table (removed since already exists)
 # c.execute('''CREATE TABLE users
@@ -68,7 +50,7 @@ def about():
 def login():
     """Log user in"""
     
-    conn = open_connection()
+    conn = sqlite3.connect('Database1.db')
     c = conn.cursor()
 
     # Forget any user_id
@@ -128,7 +110,7 @@ def register():
     # Forget any user_id
     session.clear()
     
-    conn = open_connection()
+    conn = sqlite3.connect('Database1.db')
     c = conn.cursor()
 
     # User reached route via POST (as by submitting a form via POST)
@@ -179,7 +161,7 @@ def register():
 def check():
     """Return true if username available, else false, in JSON format"""
     
-    conn = open_connection()
+    conn = sqlite3.connect('Database1.db')
     c = conn.cursor()
     
     username = request.args.get("username",'')
