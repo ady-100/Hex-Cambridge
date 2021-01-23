@@ -6,9 +6,13 @@
 
 {% block main %}
 
-    Please enter the origin country of your item of clothing, the material it is mainly made from, its cost and weight. 
-    
-    We will then calculate how environmentally and ethically friendly your item is based on these factors. A colour coding system will be displayed. 
+<h1> Shop Green Rating </h1>
+
+<p>
+Please enter the origin country of your item of clothing, its cost and weight and the two majority materials it is made of, with their respective 
+percentages If it is only made of one material, enter 0 for the percentage of material 2.
+We will then calculate how environmentally and ethically friendly your item is based on these factors. A colour coding system will be displayed.
+<p>
 
   <form action="{{ url_for('data') }}" method="post">
     Source country: <br>
@@ -260,13 +264,46 @@
                 <option value="Zimbabwe">Zimbabwe</option>
             </select><br>
     
-    Material: <br><input type="text" name="material"><br>
+    Material 1: <br>
+      
+     <select name="material1">
+                <option value="Cotton">Cotton</option>
+                <option value="Wool">Wool</option>
+                <option value="Flax">Flax</option>
+                <option value="Acrylic">Acrylic</option>
+                <option value="Silk">Silk</option>
+                <option value="Polyester">Polyester</option>
+                <option value="Polyamide">Polyamide</option>
+                <option value="Polyurethane/polyproplene">Polyurethane</option>
+                <option value="Viscose">Viscose</option>
+            </select><br>
+      
+    Percentage material 1: <br><input type="text" name="percent1"><br>
+      
+    Material 2: <br>
+      
+     <select name="material2">
+                <option value="Cotton">Cotton</option>
+                <option value="Wool">Wool</option>
+                <option value="Flax">Flax</option>
+                <option value="Acrylic">Acrylic</option>
+                <option value="Silk">Silk</option>
+                <option value="Polyester">Polyester</option>
+                <option value="Polyamide">Polyamide</option>
+                <option value="Polyurethane/polyproplene">Polyurethane</option>
+                <option value="Viscose">Viscose</option>
+            </select><br>
+      
+    Percentage material 2: <br><input type="text" name="percent2"><br>
+         
     Cost: <br><input type="text" name="cost"><br>
     Weight: <br><input type="text" name="weight"><br>
     <input type="submit" value="Submit">
 </form>
 
+<p>
+
 Please be aware, the final colour coding may not be a complete representation of the items impact on people or the environment. The production and 
-transport of clothing has a number of hidden steps.
+transport of clothing is a complex operation with many steps and unknowns.
 
 {% endblock %}
