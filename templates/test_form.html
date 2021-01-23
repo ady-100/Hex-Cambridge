@@ -9,7 +9,8 @@
 <h1> Shop Green Rating </h1>
 
 <p>
-Please enter the origin country of your item of clothing, the material it is mainly made from, its cost and weight.     
+Please enter the origin country of your item of clothing, its cost and weight and the two majority materials it is made of, with their respective 
+percentages If it is only made of one material, enter 0 for the percentage of material 2.
 We will then calculate how environmentally and ethically friendly your item is based on these factors. A colour coding system will be displayed.
 <p>
 
@@ -263,9 +264,9 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Zimbabwe">Zimbabwe</option>
             </select><br>
     
-    Material: <br>
+    Material 1: <br>
       
-     <select name="material">
+     <select name="material1">
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
                 <option value="Flax">Flax</option>
@@ -276,6 +277,24 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Polyurethane/polyproplene">Polyurethane</option>
                 <option value="Viscose">Viscose</option>
             </select><br>
+      
+    Percentage material 1: <br><input type="text" name="percent1"><br>
+      
+    Material 2: <br>
+      
+     <select name="material2">
+                <option value="Cotton">Cotton</option>
+                <option value="Wool">Wool</option>
+                <option value="Flax">Flax</option>
+                <option value="Acrylic">Acrylic</option>
+                <option value="Silk">Silk</option>
+                <option value="Polyester">Polyester</option>
+                <option value="Polyamide">Polyamide</option>
+                <option value="Polyurethane/polyproplene">Polyurethane</option>
+                <option value="Viscose">Viscose</option>
+            </select><br>
+      
+    Percentage material 2: <br><input type="text" name="percent2"><br>
          
     Cost: <br><input type="text" name="cost"><br>
     Weight: <br><input type="text" name="weight"><br>
