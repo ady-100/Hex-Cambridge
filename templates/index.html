@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <title>Hex-Cambridge</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <h1>Hex-Cambridge</h1>
+
+  <h2>The last 10 visits</h2>
+  {% for time in times %}
+    <p>{{ time }}</p>
+  {% endfor %}
+  
+  <p>This now should update automatically...</p>
+
+</body>
+</html>
