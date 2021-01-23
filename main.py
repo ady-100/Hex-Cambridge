@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 # Configure application
@@ -24,6 +24,11 @@ def about():
     """Show about us section"""
  
     return render_template("about.html")
+
+@app.route('/test-form', methods=['POST'])
+def get_data():
+    return request.form['formName']
+
 
 
 if __name__ == '__main__':
