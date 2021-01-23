@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block main %}
+
+    Please enter the origin country of your item of clothing, the material it is mainly made from, its cost and weight. 
+    
+    We will then calculate how environmentally and ethically friendly your item is based on these factors. A colour coding system will be displayed. 
+
   <form action="{{ url_for('data') }}" method="post">
     Source country: <br>
     
@@ -260,4 +265,8 @@
     Weight: <br><input type="text" name="weight"><br>
     <input type="submit" value="Submit">
 </form>
+
+Please be aware, the final colour coding may not be a complete representation of the items impact on people or the environment. The production and 
+transport of clothing has a number of hidden steps.
+
 {% endblock %}
