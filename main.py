@@ -32,6 +32,12 @@ def test_form():
 
     return render_template('test_form.html')
 
+@app.route('/data', methods=['POST'])
+def data():
+    # get data from the test HTML form, at URL /test_form, sending data to /data, with name="form_name"
+    # how to display/do something useful with this?
+    return request.form['form_name']
+    
 
 
 if __name__ == '__main__':
