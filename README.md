@@ -4,7 +4,7 @@
 * Jamie Morley
 * Anna Drummond Young
 * Oliver Reed
-* Kieran Dalton
+* Kieran Dalton :smiley:
 
 ## Project Description
 Our project aims to help people identify ethical businesses in their area.
