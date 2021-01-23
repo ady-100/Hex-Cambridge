@@ -2,6 +2,7 @@ import datetime
 
 from flask import Flask, render_template
 
+
 # Configure application
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ def root():
                    ]
 
     return render_template('index.html', times=dummy_times)
-	
+
 # The about page
 @app.route("/about")
 def about():
