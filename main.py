@@ -18,7 +18,8 @@ app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-
+app.secret_key = 'super secret key'
+    
 # Ensure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -82,7 +83,7 @@ def login():
         session["loggedin"] = True
         return redirect("/")
 
-# User reached route via GET (as by clicking a link or via redirect)
+    # User reached route via GET (as by clicking a link or via redirect)
     else:
         conn.commit()
         conn.close()
