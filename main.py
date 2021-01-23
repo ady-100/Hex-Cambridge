@@ -25,12 +25,12 @@ def about():
  
     return render_template("about.html")
 
-@app.route('/test-form', methods=['POST'])
-def get_data():
+@app.route('/test_form', methods=['POST'])
+def test_form():
     # get data from the test HTML form
-    print( request.form['formName'])
+    #print( request.form['formName'])
 
-    return render_template('test-form.html')
+    return render_template('test_form.html')
 
 
 
