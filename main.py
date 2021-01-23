@@ -19,7 +19,7 @@ def root():
     return render_template('index.html', times=dummy_times)
 
 # The about page
-app.route("/about")
+@app.route("/about")
 def about():
     """Show about us section"""
  
