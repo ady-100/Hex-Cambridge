@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block main %}
-  <form method="post">
-    Input name: <input type="text" name="test_form"><br>
+  <form action="{{ url_for('data') }}" method="post">
+    Input name: <input type="text" name="form_name"><br>
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
