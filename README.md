@@ -18,3 +18,4 @@ Our project aims to help people identify ethical businesses in their local area.
 
 ## Link
 https://hex-cambridge.nw.r.appspot.com/
+https://shopgreen.tech
