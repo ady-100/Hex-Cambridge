@@ -178,6 +178,21 @@ def check():
         return jsonify(True), 200
     
 
+@app.route('/test_form')
+def test_form():
+
+    return render_template('test_form.html')
+
+@app.route('/data', methods=['POST'])
+def data():
+    # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
+    countrypy = request.form['country']
+    materialpy = request.form['material']
+    costpy = request.form['cost']
+    weightpy = request.form['weight']
+    return render_template("data.html", output1=countrypy, output2=materialpy, output3=costpy, output4=weightpy)
+    
+
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
