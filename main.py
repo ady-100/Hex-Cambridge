@@ -32,10 +32,12 @@ def test_form():
 
 @app.route('/data', methods=['POST'])
 def data():
-    # get data from the test HTML form, at URL /test_form, sending data to /data, with name="form_name"
-    # how to display/do something useful with this?
-    input = request.form['form_name']
-    return render_template("data.html", output=input)
+    # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
+    countrypy = request.form['country']
+    materialpy = request.form['material']
+    costpy = request.form['cost']
+    weightpy = request.form['weight']
+    return render_template("data.html", output1=countrypy, output2=materialpy, output3=costpy, output4=weightpy)
     
 
 
