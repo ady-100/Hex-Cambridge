@@ -15,3 +15,6 @@ Our project aims to help people identify ethical businesses in their local area.
 * Research-driven ethical considerations
 * Easy and quick to use for small businesses and consumers
 * Value-for-money comparisons
+
+## Link
+https://hex-cambridge.nw.r.appspot.com/
