@@ -25,10 +25,8 @@ def about():
  
     return render_template("about.html")
 
-@app.route('/test_form', methods=['POST'])
+@app.route('/test_form')
 def test_form():
-    # get data from the test HTML form
-    print( request.form['formName'])
 
     return render_template('test_form.html')
 
