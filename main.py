@@ -20,14 +20,14 @@ def open_connection():
     unix_socket = '/cloudsql/{}'.format(db_connection_name)
     try:
         if os.environ.get('GAE_ENV') == 'standard':
-            conn = pymysql.connect(user=db_user, password=db_password,
+            conn1 = pymysql.connect(user=db_user, password=db_password,
                                 unix_socket=unix_socket, db=db_name,
                                 cursorclass=pymysql.cursors.DictCursor
                                 )
     except pymysql.MySQLError as e:
         print(e)
 
-    return conn
+    return conn1
 
 # Create table (removed since already exists)
 # c.execute('''CREATE TABLE users
