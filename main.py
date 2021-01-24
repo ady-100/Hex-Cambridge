@@ -415,7 +415,7 @@ def productadd():
         conn.close()
         
         # Redirect user to login page if username is valid
-        return redirect("/productlist")
+        return redirect("/products")
         
     else:
         return render_template('productadd.html')
