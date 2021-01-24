@@ -234,7 +234,7 @@ def query():
 # get data from the contact HTML form, at URL /contact, sending data to /query using the below python
     querypy = request.form['query']
     emailpy = request.form['email']
-    return render_template("data.html", output1=querypy, output2=emailpy)
+    return render_template("query.html", output1=querypy, output2=emailpy)
 
 @app.route("/map")
 def map():
