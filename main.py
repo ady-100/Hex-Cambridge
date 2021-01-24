@@ -383,7 +383,7 @@ def map():
             red = False
             orange = True
             
-        an_item = dict(companyname = username, address = address, meanscore = meanscore, green = green, orange = orange, red = red)
+        an_item = dict(companyname = username, address = address, score = str(round(float(meanscore),1)), green = green, orange = orange, red = red)
         company_list.append(an_item)
         
     conn.commit()
