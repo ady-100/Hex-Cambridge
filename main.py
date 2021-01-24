@@ -344,7 +344,7 @@ def productadd():
         costpy = float(request.form['cost'])
         weightpy = float(request.form['weight'])
     
-	A = Algorithm(countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy)
+        A = Algorithm(countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy)
         
         # Add user to database
         username = session["username"]
