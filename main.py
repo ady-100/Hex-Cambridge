@@ -201,7 +201,6 @@ def check():
 
 @app.route('/test_form')
 def test_form():
-
     return render_template('test_form.html')
 
 @app.route('/data', methods=['POST'])
@@ -212,7 +211,18 @@ def data():
     costpy = request.form['cost']
     weightpy = request.form['weight']
     return render_template("data.html", output1=countrypy, output2=materialpy, output3=costpy, output4=weightpy)
+
+@app.route("/products")
+def products():
+    return render_template('products.html')
     
+@app.route("/contact")
+def conact_py():
+    return render_template('contact.html')
+
+@app.route("/map")
+def map():
+    return render_template('map.html')
 
 
 if __name__ == '__main__':
