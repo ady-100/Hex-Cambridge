@@ -94,7 +94,7 @@ def login():
         
         # Ensure username exists and password is correct
         password = request.form.get("password")
-        if len(rows) != 1 or not check_password_hash(rows[0]["password"], (password,)):
+        if len(rows) != 1 or not check_password_hash(rows[0]["password"], password):
             return apology("invalid username and/or password", 403)
         
         # Redirect user to home page
