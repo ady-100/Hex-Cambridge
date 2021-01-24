@@ -239,7 +239,7 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
 
     ethmat = 0
     ethco = weight*((0.5)*((co_data[country][0])/15)+(2/9)*((1-co_data[country][1]+co_data[country][2]+co_data[country][3])/100))*100
-    Ethical = ethmat + ethco
+    Ethical = round(ethmat + ethco,2)
 
     # Final Score
     Score = round(Environ + 200*weight/Ethical,2)
