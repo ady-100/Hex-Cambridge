@@ -210,9 +210,9 @@ def data():
     # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
     countrypy = request.form['country']
     material1py = request.form['material1']
-    percent11py = request.form['percent1']
+    percent1py = request.form['percent1']
     material2py = request.form['material2']
-    percent12py = request.form['percent2']
+    percent2py = request.form['percent2']
     costpy = request.form['cost']
     weightpy = request.form['weight']
     return render_template("data.html", output1=countrypy, output2=material1py, output3=percent1py, output4=material2py, output5=percent2py, output6=costpy, output7=weightpy)
