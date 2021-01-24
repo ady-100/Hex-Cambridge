@@ -6,9 +6,9 @@ app = Bottle()
 def formhandler():
     """Handle the form submission"""
 
-    first = request.forms.get('first')
-    last = request.forms.get('last')
+    email = request.forms.get('email')
+    query = request.forms.get('query')
 
-    message = "Hello " + first + " " + last + "."
+    message = "Hello, thank you for your query: " + first + "  We will get back to you shortly at " + last + "."
 
-    return template("form.tpl", message=message)
+    return template("contact.html", message=message)
