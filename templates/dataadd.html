@@ -1,18 +1,22 @@
-    {% extends "layout.html" %}
+{% extends "layout.html" %}
     
     {% block title %}
     data
     {% endblock %}
     
     {% block main %}
-    <p> Thank you for using our algorithm. Your scores were:<br>
+    <p> Thank you for using our algorithm. <br>
+    the product you are adding is: {{output7}}
+</p>
+<p>
+    Your scores were:<br>
     Tonnes of CO2 eq. = {{output1}} <br>
     Ethical Score = {{output2}} <br>
     Overall Score = {{output3}} <br>
     Score per kg = {{output4}} <br>
-    Score per kg per £ spent = {{output5}} <br>
+    Score per kg per £ spent ={{output5}} <br>
     </p>
     <p>
-      Final Colour = {{output6}}
+      Final Colour={{output6}}
     </p>
     {% endblock %}
