@@ -354,9 +354,71 @@ def products():
     
     return render_template("products.html", product_list_display = product_list_display)
 
-@app.route("/productadd")
+@app.route("/productadd", methods=['GET','POST'])
 def productadd():
-    return render_template('productadd.html')
+    
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        
+        conn = open_connection()
+        c = conn.cursor()
+        productname = request.form['productname']
+        countrypy = request.form['country']
+        material1py = request.form['material1']
+        percent1py = float(request.form['percent1'])
+        material2py = request.form['material2']
+        percent2py = float(request.form['percent2'])
+        costpy = float(request.form['cost'])
+        weightpy = float(request.form['weight'])
+    
+        with open('Countries_Data.csv', newline='') as csvfile:
+            csvdata = csv.reader(csvfile, delimiter=',')
+            co_data = {}
+            for row in csvdata:
+                co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
+    
+        with open('Materials_Data.csv', newline='') as csvfile:
+            csvdata = csv.reader(csvfile, delimiter=',')
+            mat_data = {}
+            for row in csvdata:
+                mat_data[row[0]] = [float(row[1])]
+    
+        # Environmental Score
+        
+        envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
+        envmat = envmat1*weightpy/100
+        envco = weightpy * 150e-6 * (co_data[countrypy][4])
+        Environ = envmat + envco 
+    
+        # Ethical Score
+    
+        ethmat = 0
+        ethco = weightpy*((0.5)*((co_data[countrypy][0])/15)+(2/9)*((1-co_data[countrypy][1]+co_data[countrypy][2]+co_data[countrypy][3])/100))*100
+        Ethical = ethmat + ethco
+    
+        # Final Score
+        Score = Ethical/10 + 100/Environ
+    
+        # Score per kg
+        kgscore = Score/weightpy
+    
+        # Price per weight adjusted score
+        cost_effectivness = kgscore/float(costpy)
+        colour = colourcode(kgscore)
+        
+        # Add user to database
+        username = session["username"]
+        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, Score))
+        
+        # Save commit
+        conn.commit()
+        conn.close()
+        
+        # Redirect user to login page if username is valid
+        return redirect("/productlist")
+        
+    else:
+        return render_template('productadd.html')
 
 @app.route("/contact")
 def contact_py():
