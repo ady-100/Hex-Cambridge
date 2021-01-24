@@ -96,7 +96,7 @@ def FinancialAnalytics(transactions):
         mean_value = round(mean(value))
         med_value = round(median(value))
     
-    
+"""    
 def EnvironAnalytics(productlistofdict):
     score = []
     for dic in productlistofdict:
@@ -154,7 +154,7 @@ def EnvironAnalytics(productlistofdict):
         for row in csvdata:
             mat_data[row[0]] = [float(row[1])]
             
-   matco2 = []
+    matco2 = []
     for i in materials:
         matco2.append(mat_data[i][0])
     
@@ -169,3 +169,4 @@ def EnvironAnalytics(productlistofdict):
     
     return [mean_score, range_score, median_score, IQR_score, mean_country, range_country, median_country, IQR_country, mode_country, mean_matco2, range_matco2, median_matco2, IQR_matco2, mode_matco2]
     
+"""
