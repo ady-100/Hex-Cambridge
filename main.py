@@ -251,7 +251,7 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
     cost_effectivness = round(kgscore/float(cost),2)
     colour = colourcode(kgscore)
     Al = [Environ, Ethical, Score, kgscore, cost_effectivness, colour]
-		
+    
     return Al
 
 
