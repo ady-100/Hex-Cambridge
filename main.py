@@ -446,7 +446,6 @@ def analytics():
         median = 110
         mode = 50
         financialdata = {'mean':str(mean), 'median':str(median), 'mode':str(mode)}
-        analyticsdata.append(financialdata)
         
         # Generate boolean facts
         if float(financialdata['median'])>float(financialdata['mean']):
@@ -457,7 +456,6 @@ def analytics():
             MEDIANmean = False
         
         booleandata = [MEDIANmean, MEANmedian]
-        analyticsdata.append(booleandata)
             
         conn.commit()
         conn.close()
