@@ -1,11 +1,11 @@
 --------------------------------------------------------------------------------
-#SQL Cheat Sheet
+# SQL Cheat Sheet
 --------------------------------------------------------------------------------
-##Tables
+## Tables
 
-*users has columns: username, password
-*locations has columns: username, latitude, longitude
-*products has columns: username, country, material1, percentage1, material2, percentage2, cost, weight
+* users has columns: username, password
+* locations has columns: username, latitude, longitude
+* products has columns: username, country, material1, percentage1, material2, percentage2, cost, weight
 
 --------------------------------------------------------------------------------
 ##To set up a search (e.g. search for products from username = tesco)
