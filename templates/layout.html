@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
+        <link href="../static/favicon.ico" rel="icon">
+
+        <link href="../static/styles.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        {% block script %}{% endblock %}
+
+        <title>ShopGreen: {% block title %}{% endblock %}</title>
+        
+        
+        <style>
+        /* FOOTER STYLE */
+#footer {        	
+    background-color: #615a0d;
+	color: #FFFFFF;
+	height: 300px;
+	width: 100%;
+}
+#footer div {
+	;
+	float: none;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 10px;
+	width: 950px;
+}
+#footer div div {
+	float: left;
+	height: auto;
+	margin-left: 46px;
+	width: 286px;
+}
+#footer div div.first {
+	margin-left:  0;
+}
+#footer div div p {
+	font-size: 12px;
+	line-height: 18px;
+	margin: 0;
+	text-align: left;
+}
+#footer div div h3 {
+	
+	font-family: 'CarterOneRegular';
+	font-size: 20px;
+	height: 30px;
+	margin-bottom: 10px;
+}
+#footer div div h3 a {
+	display: block;
+	height: 30px;
+	text-indent: -99999px;
+}
+#footer div div div {
+	height: auto;
+	margin-left: 0;
+	margin-top: 10px;
+}
+#footer div div div p {
+	font-size: 14px;
+	line-height: 25px;
+	margin: 0;
+}
+#footer div div div p span {
+	
+	display: inline;
+	font-style: italic;
+}
+#footer div div div a {
+	display: inline-block;
+	height: 62px;
+	margin: 10px 0 0 44px;
+	text-indent:  -99999px;
+	width: 62px;
+}
+
+#footer div div form {
+	height: 40px;
+	margin-top: 25px;
+	overflow: hidden;
+}
+#footer div div form label {
+	float: left;
+}
+#footer div div form input#subscribe {
+	border: 0;
+	
+	height: 29px;
+	font-family: Arial;
+	font-size: 12px;
+	line-height: 29px;
+	padding: 0 10px;
+	width: 150px;
+}
+#footer div div form input.submit {
+	border: 0;
+	cursor: pointer;
+	float: left;
+	height: 29px;
+	margin-left: 12px;
+	width: 100px;
+}
+
+        </style>
+        <style>
+        	/*PAGE CONTENT STYLES */
+        	/* Website template by freewebsitetemplates.com */
+body {
+	color: #826320;
+	font-family: 'AndikaRegular';
+	font-size: 14px;
+	margin: 0;
+	min-width: 950px;
+	padding: 0;
+}
+@font-face {
+	font-family: 'AndikaRegular';
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'CarterOneRegular';
+	font-weight: normal;
+	font-style: normal;
+}
+a {
+	outline: none;
+}
+img {
+	border: 0;
+}
+p a {
+	;
+	font-style: italic;
+}
+p a:hover {
+	;
+}
+#header {
+
+	height: 106px;
+	overflow: hidden;
+	width: 100%;
+}
+#header div {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 950px;
+}
+#header div div#logo {
+	float: left;
+	width: auto;
+	margin:0 55px 0 0;
+}
+#header div div#navigation {
+
+	font-family: 'CarterOneRegular';
+	float: right;
+	height: auto;
+	line-height: 50px;
+	margin-top: 27px;
+	text-transform: lowercase;
+	width: 614px;
+}
+#header div div#navigation div {
+
+	padding-left: 4px;
+	height: 63px;
+	width: auto;
+}
+#header div div#navigation div ul {
+
+	clear: both;
+	float: left;
+	height: 63px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	min-width: 600px;
+}
+#header div div#navigation div ul li:first-child {
+	background: none;
+}
+#header div div#navigation div ul li {
+
+	float: left;
+	padding: 0 30px;
+}
+#header div div#navigation div ul li a {
+	
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #efd9c4;
+}
+#header div div#navigation div ul li.current a {
+	
+	text-shadow: 1px 1px 0 #f2fcd9;
+}
+#content {
+	background-color: #e6e5da;
+	height: auto;
+	width: 100%;
+}
+#content div#section {
+
+	height: 365px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 35px 0 0;
+	position: relative;
+	width: 950px;
+}
+#content div#section div,
+#content div.section div {
+	background: none;
+	float: left;
+	margin-left: 0;
+	padding-top: 0;
+	width: 286px;
+}
+#content h1 {
+	color: #745b1b;
+	font-family: 'CarterOneRegular';
+	font-size: 33px;
+	font-weight: normal;
+	line-height: 34px;
+	margin: 0;
+	padding: 0;
+	text-shadow: 1px 1px 0 #fff0d8;
+	width: auto;
+}
+#content div#section div p {
+	line-height: 21px;
+	margin: 0;
+	padding: 15px 0 0;
+	text-align: justify;
+	text-shadow: 1px 1px 0 #f4dcb6;
+	width: auto;
+}
+#content div#section div span {
+	background: none;
+	display: block;
+	height: auto;
+	font-size: 13px;
+	left: 0;
+	margin-top: 17px;
+	position: static;
+	top: 0;
+	width: auto;
+}
+#content div#section div span a {
+
+	color: #fdfdfb;
+	display: inline-block;
+	font-family: 'CarterOneRegular';
+	font-size: 15px;
+	height: 37px;
+	line-height: 34px;
+	margin-left: 10px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #216b20;
+	width: 136px;
+}
+
+#content div#section div span a.first {
+	margin-left: 0;
+}
+#content div#section div#figure {
+	margin-left: 51px;
+	width: 612px;
+}
+#content div#section div#figure img,
+#content div div img, #content div#featured ul li img {
+	border: 3px solid #fff;
+}
+#content div#section div#figure span {
+
+	display: block;
+	height: 13px;
+	margin-top: -6px;
+	width: 612px;
+}
+#content div#featured ul li p a {
+	color: #525252;
+}
+#content div#section span.background {
+
+	top: 328px;
+	display: block;
+	height: 37px;
+	position: relative;
+	width: 950px;
+}
+#content div#featured {
+
+	height: 356px;
+	padding: 35px 0;
+	width: 100%;
+}
+#content div#featured ul {
+	color: #545353;
+	list-style: none;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 0;
+	width: 950px;
+}
+#content div#featured ul li {
+	float: left;
+	margin-left: 53px;
+	width: 281px;
+}
+#content div#featured ul li.first {
+	margin-left: 0;
+}
+#content div#featured ul li span {
+
+	display: block;
+	height: 15px;
+	margin-top: -6px;
+	width: 281px;
+}
+#content div#featured ul li a.link {
+
+	color: #FDFDFB;
+	display: block;
+	height: 43px;
+	font-family: 'CarterOneRegular';
+	font-size: 16px;
+	line-height: 43px;
+	margin-top: 25px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #216B20;
+	width: 281px;
+}
+
+#content div#featured ul li p {
+	line-height: 21px;
+	margin-top: 15px;
+	padding-bottom: 5px;
+	text-align: left;
+	text-shadow: 1px 1px 0 #e8e6e7;
+}
+#content div {
+	margin: 0 auto;
+	padding: 0 0 40px;
+	width: 950px;
+}
+#content div div,
+#content div.section div.figure {
+
+	float: right;
+	margin-left: 45px;
+	padding: 35px 0 0;
+	position: relative;
+	width: 614px;
+}
+#content div div span {
+
+	display: block;
+	height: 16px;
+	top: 347px;
+	position: absolute;
+	right: 0;
+	width: 201px;
+}
+#content div p {
+	line-height: 21px;
+	margin: 0;
+	padding-bottom: 25px;
+	text-align: justify;
+	text-shadow: 1px 1px 0 #F4DCB6;
+}
+#content div b {
+	color: #816221;
+	text-shadow: 1px 1px 0 #F4DCB6;
+}
+#content div b.first {
+	display: block;
+	padding-top: 33px;
+}
+#content div#blog h1 {
+	color: #73541b;
+	font-family: 'CarterOneRegular';
+	font-size: 18px;
+	font-weight: normal;
+	margin: 0;
+	padding: 30px 0;
+	text-shadow: 1px 1px 0 #c8b57d;
+}
+#content div#blog p {
+	padding-bottom: 0;
+	margin: 0;
+	text-align: justify;
+}
+#content div h2 {
+	color: #73541B;
+	font-family: 'CarterOneRegular';
+	font-size: 24px;
+	font-weight: normal;
+	margin: 0;
+	padding: 25px 0 10px;
+	text-shadow: 1px 1px 0 #C8B57D
+}
+#content div h3 {
+	color: #73541B;
+	font-family: 'CarterOneRegular';
+	font-size: 23px;
+	font-weight: normal;
+	margin: 0;
+	padding: 25px 0 10px;
+	text-shadow: 1px 1px 0 #C8B57D
+}
+#content div h2 span {
+	font-size: 20px;
+}
+#content div.section {
+	padding-bottom: 20px;
+	overflow: hidden;
+}
+#content div.section h4 {
+	color: #73541B;
+	font-family: 'CarterOneRegular';
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 20px;
+	padding-top: 30px;
+	text-shadow: 1px 1px 0 #C8B57D;
+}
+#content div.section div {
+	padding-top: 10px;
+}
+#content div.section div a {
+
+	color: #ceb57d;
+	display: block;
+	font-family: 'CarterOneRegular';
+	font-size: 16px;
+	line-height: 50px;
+	margin-top: 25px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: none;
+	width: 283px;
+}
+#content div.section div a.selected {
+
+	color: #FDFDFB;
+	text-shadow: 1px 1px 0 #216B20;
+}
+#content div.section div.figure a {
+	background: none;
+	margin-top: 0;
+}
+#content div form {
+	margin: 0 auto;
+	width: 825px;
+}
+#content div table {
+	margin-top: 30px;
+}
+#content div form table tr td input#name,
+#content div form table tr td input#email,
+#content div form table tr td input#subject {
+
+	border: 0;
+	color: #FFFEFF;
+	font-family: 'AndikaRegular';
+	font-size: 14px;
+	height: 38px;
+	line-height: 38px;
+	margin-left: 20px;
+	padding: 0 5px;
+	width: 259px;
+}
+#content div form table tr td textarea#message {
+	margin: 0 0 0 20px;
+}
+#content div form table tr td label.newsletter {
+	margin: 0 20px 0 15px;
+}
+#content div form table tr td input#send {
+
+	border: 0;
+	cursor: pointer;
+	height: 36px;
+	margin-left: 193px;
+	width: 96px;
+}
+
+#content div form table td {
+	padding: 10px 0
+}
+#content div form table td label strong {
+	font-size: 16px;
+	font-weight: normal;
+	text-shadow: 1px 1px 1px #fff5e1;
+}
+#content div table tr td textarea {
+
+	border: 0;
+	color: #FFFEFF;
+	font-family: 'AndikaRegular';
+	font-size: 14px;
+	height: 184px;
+	line-height: 24px;
+	overflow: hidden;
+	padding: 5px;
+	resize: none;
+	width: 715px;
+}
+#content div table tr td label span,
+#content div form div fieldset label span {
+	color: #654e19;
+	font-family: Arial;
+	font-size: 12px;
+}
+#content div form div fieldset label span {
+	background: none;
+	display: inline;
+	height: auto;
+	position: static;
+	width: auto;
+}
+#content div table tr td label.email {
+	font-weight: bold;
+	margin-left: 115px;
+	padding-top: 5px;
+	vertical-align: sub;
+}
+#content div table tr td label input#newsletter,
+#content div table tr td label input#terms,
+#content div form div fieldset div label input#newsletter,
+#content div form div fieldset div label input#terms,
+#content div form div fieldset div label input#shipping,
+#content div form div fieldset div label input#saveas {
+	vertical-align: middle;
+}
+#content div table tr td.message {
+	vertical-align: top;
+}
+#content div form#register {
+	margin-top: 30px;
+	overflow: hidden;
+	width: auto;
+}
+#content div form div {
+
+	float: left;
+	height: 396px;
+	margin: 0 0 0 24px;
+	padding: 0;
+	width: 463px;
+}
+#content div form div.first {
+	margin-left: 0;
+}
+#content div form div fieldset {
+	border: 0;
+	margin: 20px auto;
+	width: 386px;
+}
+#content div form div fieldset input.inputtext {
+
+	border: 0;
+	height: 31px;
+	line-height: 31px;
+	margin: 10px 0;
+	padding: 0 5px;
+	width: 376px;
+}
+#content div form div fieldset input#city {
+
+	border: 0;
+	height: 32px;
+	line-height: 32px;
+	margin: 10px 0;
+	padding: 0 5px;
+	width: 172px;
+}
+#content div form div fieldset label.zipcode {
+	margin-left: 168px;
+}
+#content div form div fieldset input#zipcode {
+
+	border: 0;
+	height: 32px;
+	line-height: 32px;
+	margin: 0 0 0 15px;
+	padding: 0 5px;
+	width: 172px;
+}
+#content div form div div {
+	background: none;
+	float: none;
+	height: auto;
+	margin-left: 0;
+	margin-top: 33px;
+	width: auto;
+}
+#content div form div div label.terms {
+	padding-left: 8px;
+}
+#content div form input#createaccount {
+
+	border: 0;
+	cursor: pointer;
+	float: right;
+	height: 36px;
+	margin-top: 30px;
+	width: 188px;
+}
+        </style>
+        
+        
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light border">
+            <a class="navbar-brand" href="/"><span class="red" style="color:green;">ShopGreen</span></a>
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if session["loggedin"] %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/map">Find a Company</a></li>
+			<li class="nav-item"><a class="nav-link" href="/test_form">Consumer Form</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/products">Product List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/productadd">Add Product</a></li>
+
+
+                    </ul>
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/map">Find a Company</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/test_form">Consumer Form</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register">Company Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Company Log In</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+        
+        
+	<div id="content">
+         <main class="container p-5">
+            {% block main %}{% endblock %}
+         </main>
+	</div>
+
+        
+        
+        
+
+
+	<div id="footer">
+		<div>
+			<div class="first">
+				<h3>Get in touch!</h3>
+				<p>
+					Feel free to contact us with any queries using the form below:
+				</p>
+					<p>
+						<a href="/contact" style="color:white;">Contact Us</a>
+					</p>
+
+			</div>
+			<div>
+				<h3>Explore our site!</h3>
+				<p>
+				  <a href="/" style="color:white;">Home</a><br>
+                  <a href="/about" style="color:white;">About Us</a><br>
+                  <a href="/map" style="color:white;">Find a Company</a><br>
+                  <a href="/products" style="color:white;">Product List</a><br>
+                  <a href="/productadd" style="color:white;">Add Product</a><br>
+                  <a href="/test_form" style="color:white;">Test form</a><br>	 
+				</p>
+		  
+				
+			</div>
+			<div>
+				
+				<p>
+					We are fully committed to bringing you the highest quality service, and will always aim to respond to your queries to improve our website. However, we accept no responsibility for any out of date or incorrect information. This is to be used as a guide only and not for as a complete indication of products.
+				</p>
+				<p>
+					Copyright &copy; 2021 Ecothunder Ltd <br> All rights reserved
+				</p>
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<br><br><br>
+		</div>
+	</div>
+	
+        
+
+    </body>
+
+</html>
