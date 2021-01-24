@@ -426,6 +426,7 @@ def analytics():
         username = session['username']
         c.execute("SELECT * FROM locations WHERE username = %s", (username,))
         companydetails = c.fetchall()
+        meanscore1 = 42
         
         for item in companydetails:
             username = item['username']
@@ -461,7 +462,9 @@ def analytics():
         conn.commit()
         conn.close()
         
-        return render_template("analytics.html", analyticsdata)
+        analyticsdata = {'financialdata':financialdata, 'environmentaldata':environmentaldata, 'booleandata':booleandata}
+        
+        return render_template("analytics.html", content = analyticsdata)
 
 
 if __name__ == '__main__':
