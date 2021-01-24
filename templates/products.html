@@ -9,9 +9,39 @@
 
 <p>
 
-Below are your products you have saved
+Below are the products you have saved
 
 </p>
 
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Country</th>
+            <th scope="col">Major Material</th>
+            <th scope="col">Percentage</th>
+			<th scope="col">Minor Material</th>
+			<th scope="col">Percentage</th>
+			<th scope="col">Weight</th>
+			<th scope="col">Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in product_list_append %}
+        <tr>
+            <td>{{item['productname']}}</td>
+            <td>{{item['cost']}}</td>
+            <td>{{item['country']}}</td>
+            <td>{{item['material1']}}</td>
+            <td>{{item['percentage1']}}</td>
+			<td>{{item['material2']}}</td>
+            <td>{{item['percentage2']}}</td>
+			<td>{{item['weight']}}</td>
+            <td>{{item['score']}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-{% endblock %}
+

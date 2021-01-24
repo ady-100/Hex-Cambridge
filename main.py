@@ -93,6 +93,7 @@ def login():
         c.execute("SELECT * FROM users WHERE username = %s", (username,))
         rows = c.fetchall()
         
+        
         # Ensure username exists and password is correct
         password = request.form.get("password")
         if len(rows) != 1 or not check_password_hash(rows[0]["password"], password):
@@ -120,7 +121,7 @@ def logout():
     session.clear()
     
     # Redirect user to login form
-    loggedin = False
+    session["loggedin"] = False
     return redirect("/")
 
 # Register
@@ -270,8 +271,8 @@ def data():
     return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colourimg)
 
 @app.route('/dataadd', methods=['POST'])
-def data():
-    # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
+def dataadd():
+    # get data from the test HTML form, at URL /productadd, sending data to /dataadd using the below python
     pronamepy = request.form['proname']
     countrypy = request.form['country']
     material1py = request.form['material1']
