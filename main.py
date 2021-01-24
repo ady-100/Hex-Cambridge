@@ -390,13 +390,13 @@ def analytics():
     c.execute("SELECT * FROM locations WHERE username = %s", (username,))
     companydetails = c.fetchall()
     
-    username = companydetails[0]
-    address = companydetails[1]
-    meanscore = companydetails[2]
+    for item in companydetails:
+        username = item['username']
+        address = item['latitude']
+        meanscore = item['longitude']
         
     conn.commit()
     conn.close()
-    
     
     return render_template("analytics.html", analytics_data)
 
