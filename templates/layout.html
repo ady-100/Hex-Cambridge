@@ -126,7 +126,7 @@
 body {
 	color: #826320;
 	font-family: 'AndikaRegular';
-	font-size: 14px;
+	font-size: 16px;
 	margin: 0;
 	min-width: 950px;
 	padding: 0;
@@ -687,8 +687,9 @@ p a:hover {
 			<div class="first">
 				<h3>Get in touch!</h3>
 				<p>
-					Feel free to contact us with any queries using the form below:
-				</p>
+					Feel free to contact us with any queries, you can find our details on our contact page:
+				</p> 
+				<br>
 					<p>
 						<a href="/contact" style="color:white;">Contact Us</a>
 					</p>
@@ -697,13 +698,20 @@ p a:hover {
 			<div>
 				<h3>Explore our site!</h3>
 				<p>
+				{% if session["loggedin"] %}
 				  <a href="/" style="color:white;">Home</a><br>
                   <a href="/about" style="color:white;">About Us</a><br>
                   <a href="/map" style="color:white;">Find a Company</a><br>
-		  <a href="/test_form" style="color:white;">Consumer form</a><br>
+                  <a href="/test_form" style="color:white;">Consumer form</a><br>
                   <a href="/products" style="color:white;">Product List</a><br>
                   <a href="/productadd" style="color:white;">Add Product</a><br>	 
-				</p>
+				{% else %}
+				<a href="/" style="color:white;">Home</a><br>
+                <a href="/about" style="color:white;">About Us</a><br>
+                <a href="/map" style="color:white;">Find a Company</a><br>
+                <a href="/test_form" style="color:white;">Consumer form</a><br>
+				{% endif %}
+                </p>
 				
 			</div>
 			<div>

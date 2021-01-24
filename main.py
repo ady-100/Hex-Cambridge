@@ -322,8 +322,22 @@ def products():
         percentage2 = item["percentage2"]
         weight = item["weight"]
         score = item["score"]
+        colour = colourcode(float(score)/float(weight))
         
-        an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score)
+        if colour == "Green":
+            green = True
+            red = False
+            orange = False
+        elif colour == "Red":
+            green = False
+            red = True
+            orange = False
+        elif colour == "Orange":
+            green = False
+            red = False
+            orange = True
+            
+        an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score, colour= colour, green = green, red = red, orange = orange)
         product_list_display.append(an_item)
         
     # Save commit
@@ -353,7 +367,7 @@ def productadd():
         
         # Add user to database
         username = session["username"]
-        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score, colour) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2], A[5]))
+        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2]))
         
         # Save commit
         conn.commit()

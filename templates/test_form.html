@@ -7,20 +7,46 @@
 {% block main %}
 
 <p>
-<h1> Shop Green Rating </h1>
+<h1> Find out your product's <font style="color:green;">ShopGreen </font>Rating here! </h1>
 </p>
 
-<p>
-Please enter the origin country of your item of clothing, its cost and weight and the two majority materials it is made of, with their respective 
-percentages. If it is only made of one material, enter 0 for the percentage of material 2.
-We will then calculate how environmentally and ethically friendly your item is based on these factors. A colour coding system will be displayed.
-</p>
 
-<p>
+<div id="featured">
+			<ul>
+				<li class="first">
+					<span></span>
+					<p>
+						<b style="font-size:x-large; font-weight:bold;">Enter the details below to find out how green your product is.</b>
+						<br><br>If it is only made of one material, enter 0 for the percentage of material 2
+					</p>
+				</li>
+				<li>
+					<span></span>
+					<p>
+						<b style="font-size:x-large;  font-weight:bold;">Don't see the right options for your product? <br><br>Don't worry.</b>
+						<br><br>We are working hard to expand our database of valid products
+					</p>
+				</li>
+				<li>
+					<span></span>
+					<p>
+					Word on the street: <br><br>
+					<em style="font-size:x-large; color:green; font-weight:bold;">Checking the ShopGreen score of my products was an eye-opener!</em>
+						-- Bill Gates
+						<br><br>
+						<em style="font-size:x-large; color:green; font-weight:bold;">ShopGreen ratings will soon be more important than Nobel Prizes</em>
+						-- Alfred Nobel
+					</p>
+				</li>
+			</ul>
+		</div>
+
+
   <form action="/data" method="post">
-    Source country: <br>
-    
-    <select name="country">
+    <br>
+    <div class="form-group">
+    <select class="form-control" name="country">
+    			<option value="" disabled selected>Source country</option>
                 <option value="Australia">Australia</option>
                 <option value="Bangladesh">Bangladesh</option>
                 <option value="China">China</option>
@@ -39,12 +65,14 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="USA">United States of America</option>
                 <option value="Vietnam">Vietnam</option>
                 <option value="Western Europe">Western Europe</option>     
-            </select><br>
-    </p>
-    <p>
-    Material 1: <br>
-
-     <select name="material1">
+            </select>
+            </div>
+    
+    
+    
+    <div class="form-group">
+     <select class="form-control" name="material1" placeholder="Material 1">
+     			<option value="" disabled selected>Material 1</option>
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
                 <option value="Flax">Flax</option>
@@ -54,15 +82,16 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Polyamide">Polyamide</option>
                 <option value="Polyurethane">Polyurethane/Polypropylene</option>
                 <option value="Viscose">Viscose</option>
-            </select><br>
-    </p>
-    <p>
-    Percentage material 1: <br><input type="text" name="percent1"><br>
-    </p>
-    <p>
-    Material 2: <br>
-   
-     <select name="material2">
+            </select>
+	</div>
+    
+    <div class="form-group">
+    <input class="form-control" type="text" name="percent1" placeholder="Percentage material 1">
+    </div>
+    
+    <div class="form-group">
+     <select class="form-control" name="material2">
+     			<option value="" disabled selected>Material 2</option>
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
                 <option value="Flax">Flax</option>
@@ -72,25 +101,25 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Polyamide">Polyamide</option>
                 <option value="Polyurethane">Polyurethane/Polypropylene</option>
                 <option value="Viscose">Viscose</option>
-            </select><br>
-    </p>
-    <p>
-    Percentage material 2: <br><input type="text" name="percent2"><br>
-    </p>
-    <p>    
-    Cost/£: <br><input type="text" name="cost"><br>
-    </p>
-    <p>
-    Weight/kg: <br><input type="text" name="weight"><br>
-    </p>
-    <p>    
-    <input type="submit" value="Submit">
+            </select>
+    </div>
+    <div class="form-group">
+    <input class="form-control" type="text" name="percent2" placeholder="Percentage material 2">
+    </div>
+    <div class="form-group">    
+    <input class="form-control" type="text" name="cost" placeholder="Cost/£">
+    </div>
+    <div class="form-group">
+    <input class="form-control" type="text" name="weight" placeholder="Weight/kg">
+    </div>    
+    <div style="text-align.center">
+    <input class="btn btn-primary"type="submit" value="Submit">
+    </div>
 </form>
-
-</p>
 
 <p>
 Please be aware, the final colour coding may not be a complete representation of the items impact on people or the environment. The production and 
 transport of clothing is a complex operation with many steps and unknowns.
 </p>
 {% endblock %}
+
