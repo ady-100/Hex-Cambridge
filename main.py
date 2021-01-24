@@ -381,7 +381,7 @@ def map():
     company_list = []
     
     for item in productlist:
-        username = productlist['username']
+        username = item['username']
         company_list.append(username)
         
     # Save commit
