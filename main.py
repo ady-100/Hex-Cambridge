@@ -435,6 +435,8 @@ def analytics():
         # Receive analytics data
         c.execute("SELECT * FROM transactions WHERE username = %s", (username,))
         companytransactions = c.fetchall()
+        
+        # EDIT THIS FUNCTION AND ITS OUTPUTS
         financedata = FinancialAnalytics(companytransactions)
             
         conn.commit()
