@@ -444,7 +444,7 @@ def analytics():
         mean = 100
         median = 110
         mode = 50
-        financialdata = dict(mean=str(mean), median=str(median), mode = str(mode))
+        financialdata = {'mean':str(mean), 'median':str(median), 'mode':str(mode)}
         analyticsdata.append(financialdata)
         
         # Generate boolean facts
