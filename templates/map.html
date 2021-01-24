@@ -1,59 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add Map</title>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM--4xkg33-Fn5zLmOjWs1jcg10zZxF_c&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <style type="text/css">
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-      }
-    </style>
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of the shops
-        const the_shops = { lat: 55.951734, lng: -3.199481 };
-        // The map, centered at the shops
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 12,
-          center: the_shops,
-        });
-        // The marker, positioned at the shops
-        const marker = new google.maps.Marker({
-          position: the_shops,
-          map: map,
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
-  </body>
-</html>
+{% extends "layout.html" %}
 
+{% block title %}
+    Finding a Local Business
+{% endblock %}
 
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Company Name</th>
-            <th scope="col">Address</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in product_list_append %}
-        <tr>
-            <td>{{item['comname']}}</td>
-            <td>{{item['address']}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% block main %}
+
+<p>
+Have a look round for your local businesses - and see if they're featured on this website!
+</p>
+
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDtLAo9acn5vA1KoEixjTcjTESRz9L_X3A&q=local+shops" allowfullscreen>
+</iframe>
+
+{% endblock %}
