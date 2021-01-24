@@ -244,7 +244,7 @@ def data():
     envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
     envmat = envmat1*weightpy/100
     envco = weightpy * 150e-6 * (co_data[countrypy][4])
-    Environ = envmat + envco 
+    Environ = round(envmat + envco,2) 
 
     # Ethical Score
 
@@ -253,13 +253,13 @@ def data():
     Ethical = ethmat + ethco
 
     # Final Score
-    Score = Ethical/10 + 100/Environ
+    Score = round(Ethical/10 + 100/Environ,2)
 
     # Score per kg
-    kgscore = Score/weightpy
+    kgscore = round(Score/weightpy,2)
 
     # Price per weight adjusted score
-    cost_effectivness = kgscore/float(costpy)
+    cost_effectivness = round(kgscore/float(costpy),2)
 
     colour = colourcode(kgscore)
 
@@ -301,7 +301,7 @@ def dataadd():
     envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
     envmat = envmat1*weightpy/100
     envco = weightpy * 150e-6 * (co_data[countrypy][4])
-    Environ = envmat + envco 
+    Environ = round(envmat + envco,2) 
 
     # Ethical Score
 
@@ -310,13 +310,13 @@ def dataadd():
     Ethical = ethmat + ethco
 
     # Final Score
-    Score = Ethical/10 + 100/Environ
+    Score = round(Ethical/10 + 100/Environ,2)
 
     # Score per kg
-    kgscore = Score/weightpy
+    kgscore = round(Score/weightpy,2)
 
     # Price per weight adjusted score
-    cost_effectivness = kgscore/float(costpy)
+    cost_effectivness = round(kgscore/float(costpy),2)
 
     colour = colourcode(kgscore)
 
