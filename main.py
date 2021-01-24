@@ -150,8 +150,8 @@ def register():
 
         # Query database for username
         username = request.form.get("username")
-        rows = c.execute("SELECT * FROM users WHERE username = %s", (username,))
-        rows = rows.fetchall()
+        c.execute("SELECT * FROM users WHERE username = %s", (username,))
+        rows = c.fetchall()
 
         # Ensure username is not taken
         if len(rows) != 0:
@@ -185,8 +185,8 @@ def check():
     c = conn.cursor()
     
     username = request.args.get("username",'')
-    rows = c.execute("SELECT * FROM users WHERE username = :name", name=username)
-    rows = rows.fetchall()
+    c.execute("SELECT * FROM users WHERE username = :name", name=username)
+    rows = c.fetchall()
     
     # Save commit
     conn.commit()
