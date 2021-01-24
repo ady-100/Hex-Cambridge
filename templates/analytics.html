@@ -24,11 +24,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for item in content.financialdata %}
+		{% for item in content['financialdata'] %}
 			<tr>
-			<td>{{item.mean}}</td>
-			<td>{{item.median}}</td>
-			<td>{{item.mode}}</td>
+			<td>{{item['mean']}}</td>
+			<td>{{item['median']}}</td>
+			<td>{{item['mode']}}</td>
         </tr>
         {% endfor %}
     </tbody>
