@@ -210,9 +210,9 @@ def data():
     # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
     countrypy = request.form['country']
     material1py = request.form['material1']
-    percent11py = request.form['percent1']
+    percent1py = request.form['percent1']
     material2py = request.form['material2']
-    percent12py = request.form['percent2']
+    percent2py = request.form['percent2']
     costpy = request.form['cost']
     weightpy = request.form['weight']
     return render_template("data.html", output1=countrypy, output2=material1py, output3=percent1py, output4=material2py, output5=percent2py, output6=costpy, output7=weightpy)
@@ -229,9 +229,12 @@ def productadd():
 def contact_py():
     return render_template('contact.html')
 
-@app.route('/products', methods=['POST'])
-def Query():
-    return render_template("products.html")
+@app.route('/query', methods=['POST'])
+def query():
+# get data from the contact HTML form, at URL /contact, sending data to /query using the below python
+    querypy = request.form['query']
+    emailpy = request.form['email']
+    return render_template("query.html", output1=querypy, output2=emailpy)
 
 @app.route("/map")
 def map():
