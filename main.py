@@ -463,7 +463,12 @@ def analytics():
         conn.close()
         
         analyticsdata = {'financialdata':financialdata, 'environmentaldata':environmentaldata, 'booleandata':booleandata}
+	
+	#Enivonmental Analytics
+	env = EnvironAnalytics(product_list_display)
+	
         
+	
         return render_template("analytics.html", content = analyticsdata)
 
 
