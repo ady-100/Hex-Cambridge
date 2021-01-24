@@ -92,6 +92,7 @@ def FinancialAnalytics(transactions):
         value = item['value']
         datetime = item['date']
         tag = item['tag']
-        # Do stuff and return a number
-        return 42
+
+        mean_value = round(mean(value))
+        med_value = round(median(value))
     
