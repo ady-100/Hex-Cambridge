@@ -3,6 +3,8 @@ import datetime
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
+import os
+import pymysql
 
 from helpers import apology, login_required
 
@@ -10,6 +12,22 @@ from helpers import apology, login_required
 app = Flask(__name__)
 
 # Set up SQL database
+db_user = os.environ.get('CLOUD_SQL_USERNAME')
+db_password = os.environ.get('CLOUD_SQL_PASSWORD')
+db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
+db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
+def open_connection():
+    unix_socket = '/cloudsql/{}'.format(db_connection_name)
+    try:
+        if os.environ.get('GAE_ENV') == 'standard':
+            conn1 = pymysql.connect(user=db_user, password=db_password,
+                                unix_socket=unix_socket, db=db_name,
+                                cursorclass=pymysql.cursors.DictCursor
+                                )
+    except pymysql.MySQLError as e:
+        print(e)
+
+    return conn1
 
 # Create table (removed since already exists)
 # c.execute('''CREATE TABLE users
@@ -50,7 +68,7 @@ def about():
 def login():
     """Log user in"""
     
-    conn = sqlite3.connect('Database1.db')
+    conn = open_connection()
     c = conn.cursor()
 
     # Forget any user_id
@@ -70,11 +88,13 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = c.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
-        rows = rows.fetchall()
+        username = request.form.get("username")
+        c.execute("SELECT * FROM users WHERE username = %s", (username,))
+        rows = c.fetchall()
         
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0][1], request.form.get("password")):
+        password = request.form.get("password")
+        if len(rows) != 1 or not check_password_hash(rows[0]["password"], password):
             return apology("invalid username and/or password", 403)
         
         # Redirect user to home page
@@ -110,7 +130,7 @@ def register():
     # Forget any user_id
     session.clear()
     
-    conn = sqlite3.connect('Database1.db')
+    conn = open_connection()
     c = conn.cursor()
 
     # User reached route via POST (as by submitting a form via POST)
@@ -130,8 +150,8 @@ def register():
 
         # Query database for username
         username = request.form.get("username")
-        rows = c.execute("SELECT * FROM users WHERE username = ?", username)
-        rows = rows.fetchall()
+        c.execute("SELECT * FROM users WHERE username = %s", (username,))
+        rows = c.fetchall()
 
         # Ensure username is not taken
         if len(rows) != 0:
@@ -141,7 +161,7 @@ def register():
         password_hash = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
 
         # Add user to database
-        c.execute("INSERT INTO users ('username', 'hash') VALUES (?,?)", (username, password_hash))
+        c.execute("INSERT INTO users (username, password) VALUES (%s,%s)", (username, password_hash))
 
         # Save commit
         conn.commit()
@@ -161,12 +181,12 @@ def register():
 def check():
     """Return true if username available, else false, in JSON format"""
     
-    conn = sqlite3.connect('Database1.db')
+    conn = open_connection()
     c = conn.cursor()
     
     username = request.args.get("username",'')
-    rows = c.execute("SELECT * FROM users WHERE username = :name", name=username)
-    rows = rows.fetchall()
+    c.execute("SELECT * FROM users WHERE username = %s", (username,))
+    rows = c.fetchall()
     
     # Save commit
     conn.commit()
@@ -181,7 +201,6 @@ def check():
 
 @app.route('/test_form')
 def test_form():
-
     return render_template('test_form.html')
 
 @app.route('/data', methods=['POST'])
@@ -192,7 +211,18 @@ def data():
     costpy = request.form['cost']
     weightpy = request.form['weight']
     return render_template("data.html", output1=countrypy, output2=materialpy, output3=costpy, output4=weightpy)
+
+@app.route("/products")
+def products():
+    return render_template('products.html')
     
+@app.route("/contact")
+def conact_py():
+    return render_template('contact.html')
+
+@app.route("/map")
+def map():
+    return render_template('map.html')
 
 
 if __name__ == '__main__':
