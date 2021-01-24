@@ -166,9 +166,14 @@ def register():
         # Add user to database
         c.execute("INSERT INTO users (username, password) VALUES (%s,%s)", (username, password_hash))
 
+        # Save user address
+        address = request.form.get("address")
+        c.execute("INSERT INTO locations (username, latitude) VALUES (%s,%s)", (username, address))
+        
         # Save commit
         conn.commit()
         conn.close()
+        
         
         # Redirect user to login page if username is valid
         return redirect("/login")
@@ -376,13 +381,15 @@ def map():
     conn = open_connection()
     c = conn.cursor()
     
-    c.execute("SELECT * FROM products")
+    c.execute("SELECT * FROM locations")
     productlist = c.fetchall()
     company_list = []
     
     for item in productlist:
         username = item['username']
-        company_list.append(username)
+        address = item['latitude']
+        an_item = dict(companyname = username, address = address)
+        company_list.append(an_item)
         
     # Save commit
     conn.commit()

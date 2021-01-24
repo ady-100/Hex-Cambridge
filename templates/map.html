@@ -25,10 +25,10 @@ Have a look round for your local businesses - and see if they're featured on thi
       </tr>
     </thead>
   <tbody>
-      {% for item in company_list_append %}
+      {% for item in company_list %}
       <tr>
-          <td>{item['companyname']}</td>
-          <td>{item['address']}</td>
+          <td>{{item.companyname}}</td>
+          <td>{{item.address}}</td>
       </tr>
       {% endfor %}
   </tbody>  
