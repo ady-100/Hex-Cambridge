@@ -395,6 +395,15 @@ def map():
     
     return render_template("map.html", company_list = company_list)
 
+@app.route("/analytics")
+def analytics():
+    
+    # Initialise
+    analytics_data = []
+    # Score Analytics
+    
+    return render_template("analytics.html", analytics_data)
+
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
