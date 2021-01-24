@@ -92,6 +92,7 @@ def login():
         username = request.form.get("username")
         c.execute("SELECT * FROM users WHERE username = %s", (username,))
         rows = c.fetchall()
+        session["username"] = username
         
         
         # Ensure username exists and password is correct
@@ -262,11 +263,12 @@ def data():
 
     colour = colourcode(kgscore)
 
-    if colour = "Green":
-	colourimg = "https://colourlex.com/wp-content/uploads/2015/01/Emerald_green_painted_swatch_Muntwyler-225-s.jpg"
-    elif colour = "Orange":
-	colourimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAA1BMVEX/XgA92nntAAAASElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AcUIAAFkqh/QAAAAAElFTkSuQmCC"
-    else colourimg = "https://professionals.tarkett.com/media/img/M/TH_3917011_3707003_3708011_3912011_3914011_800_800.jpg"
+    if colour == "Green":
+        colourimg = "https://colourlex.com/wp-content/uploads/2015/01/Emerald_green_painted_swatch_Muntwyler-225-s.jpg"
+    elif colour == "Orange":
+        colourimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAA1BMVEX/XgA92nntAAAASElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AcUIAAFkqh/QAAAAAElFTkSuQmCC"
+    else:
+        colourimg = "https://professionals.tarkett.com/media/img/M/TH_3917011_3707003_3708011_3912011_3914011_800_800.jpg"
 
     return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colourimg)
 
