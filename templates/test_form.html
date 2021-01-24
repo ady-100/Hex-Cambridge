@@ -6,15 +6,17 @@
 
 {% block main %}
 
-<h1> Shop Green Rating </h1>
-
 <p>
+<h1> Shop Green Rating </h1>
+</p>
+
 <p>
 Please enter the origin country of your item of clothing, its cost and weight and the two majority materials it is made of, with their respective 
 percentages If it is only made of one material, enter 0 for the percentage of material 2.
 We will then calculate how environmentally and ethically friendly your item is based on these factors. A colour coding system will be displayed.
-<p>
+</p>
 
+<p>
   <form action="{{ url_for('data') }}" method="post">
     Source country: <br>
     
@@ -264,10 +266,10 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select><br>
-    <p>
+    </p>
     <p>
     Material 1: <br>
-      
+
      <select name="material1">
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
@@ -279,11 +281,13 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Polyurethane">Polyurethane/Polypropylene</option>
                 <option value="Viscose">Viscose</option>
             </select><br>
+    </p>
     <p>
     Percentage material 1: <br><input type="text" name="percent1"><br>
+    </p>
     <p>
     Material 2: <br>
-      
+   
      <select name="material2">
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
@@ -295,20 +299,24 @@ We will then calculate how environmentally and ethically friendly your item is b
                 <option value="Polyurethane">Polyurethane/Polypropylene</option>
                 <option value="Viscose">Viscose</option>
             </select><br>
-    <p>  
+    </p>
+    <p>
     Percentage material 2: <br><input type="text" name="percent2"><br>
-    <p>     
+    </p>
+    <p>    
     Cost/£: <br><input type="text" name="cost"><br>
+    </p>
     <p>
     Weight/kg: <br><input type="text" name="weight"><br>
+    </p>
     <p>    
     <input type="submit" value="Submit">
 </form>
 
-<p>
-<p>
+</p>
 
+<p>
 Please be aware, the final colour coding may not be a complete representation of the items impact on people or the environment. The production and 
 transport of clothing is a complex operation with many steps and unknowns.
-
+</p>
 {% endblock %}
