@@ -323,21 +323,8 @@ def products():
         weight = item["weight"]
         score = item["score"]
         colour = colourcode(float(score)/float(weight))
-        
-        if colour == "Green":
-            green = True
-            red = False
-            orange = False
-        elif colour == "Red":
-            green = False
-            red = True
-            orange = False
-        elif colour == "Orange":
-            green = False
-            red = False
-            orange = True
             
-        an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score, colour= colour, green = green, red = red, orange = orange)
+        an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score, colour= colour)
         product_list_display.append(an_item)
         
     # Save commit
