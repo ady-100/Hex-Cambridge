@@ -225,13 +225,13 @@ def data():
     costpy = request.form['cost']
     weightpy = request.form['weight']
 
-	  with open('Countries_Data.csv', newline='') as csvfile:
+    with open('Countries_Data.csv', newline='') as csvfile:
         csvdata = csv.reader(csvfile, delimiter=',')
         co_data = {}
         for row in csvdata:
             co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
 
-	  with open('Materials_Data.csv', newline='') as csvfile:
+    with open('Materials_Data.csv', newline='') as csvfile:
         csvdata = csv.reader(csvfile, delimiter=',')
         mat_data = {}
         for row in csvdata:
