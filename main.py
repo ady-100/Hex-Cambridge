@@ -373,7 +373,22 @@ def query():
 
 @app.route("/map")
 def map():
-    return render_template('map.html')
+    conn = open_connection()
+    c = conn.cursor()
+    
+    c.execute("SELECT * FROM products")
+    productlist = c.fetchall()
+    company_list = []
+    
+    for item in productlist:
+        username = productlist['username']
+        company_list.append(username)
+        
+    # Save commit
+    conn.commit()
+    conn.close()
+    
+    return render_template("map.html", company_list = company_list)
 
 
 if __name__ == '__main__':
