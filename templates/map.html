@@ -17,4 +17,21 @@ Have a look round for your local businesses - and see if they're featured on thi
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDtLAo9acn5vA1KoEixjTcjTESRz9L_X3A&q=local+shops" allowfullscreen>
 </iframe>
 
+<table class="table table-bordered table-hover">
+  <thead>
+      <tr>
+          <th scope="col">Company Name</th>
+          <th scope="col">Company Address</th>
+      </tr>
+    </thead>
+  <tbody>
+      {% for item in company_list %}
+      <tr>
+          <td>{{item.companyname}}</td>
+          <td>{{item.address}}</td>
+      </tr>
+      {% endfor %}
+  </tbody>  
+</table>
+
 {% endblock %}

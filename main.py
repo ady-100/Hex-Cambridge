@@ -166,9 +166,14 @@ def register():
         # Add user to database
         c.execute("INSERT INTO users (username, password) VALUES (%s,%s)", (username, password_hash))
 
+        # Save user address
+        address = request.form.get("address")
+        c.execute("INSERT INTO locations (username, latitude) VALUES (%s,%s)", (username, address))
+        
         # Save commit
         conn.commit()
         conn.close()
+        
         
         # Redirect user to login page if username is valid
         return redirect("/login")
@@ -348,7 +353,7 @@ def productadd():
         
         # Add user to database
         username = session["username"]
-        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2]))
+        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score, colour) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2], A[5]))
         
         # Save commit
         conn.commit()
@@ -373,7 +378,24 @@ def query():
 
 @app.route("/map")
 def map():
-    return render_template('map.html')
+    conn = open_connection()
+    c = conn.cursor()
+    
+    c.execute("SELECT * FROM locations")
+    productlist = c.fetchall()
+    company_list = []
+    
+    for item in productlist:
+        username = item['username']
+        address = item['latitude']
+        an_item = dict(companyname = username, address = address)
+        company_list.append(an_item)
+        
+    # Save commit
+    conn.commit()
+    conn.close()
+    
+    return render_template("map.html", company_list = company_list)
 
 
 if __name__ == '__main__':
