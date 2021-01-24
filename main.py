@@ -216,9 +216,9 @@ def data():
 def products():
     return render_template('products.html')
     
-@app.route("/addproducts")
-def addproducts():
-    return render_template('addproducts.html')
+@app.route("/productadd")
+def productadd():
+    return render_template('productadd.html')
 
 @app.route("/contact")
 def conact_py():
