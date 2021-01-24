@@ -1,81 +1,20 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    About Us
+    Finding a Local Business
 {% endblock %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add Map</title>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM--4xkg33-Fn5zLmOjWs1jcg10zZxF_c&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <style type="text/css">
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-      }
-    </style>
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of the shops
-        const the_shops = { lat: 55.951734, lng: -3.199481 };
-        // The map, centered at the shops
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 12,
-          center: the_shops,
-        });
-        // The marker, positioned at the shops
-        const marker = new google.maps.Marker({
-          position: the_shops,
-          map: map,
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
-  </body>
-</html>
+{% block main %}
 
+<p>
+Have a look round for your local businesses - and see if they're featured on this website!
+</p>
 
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Country</th>
-            <th scope="col">Major Material</th>
-            <th scope="col">Percentage</th>
-			<th scope="col">Minor Material</th>
-			<th scope="col">Percentage</th>
-			<th scope="col">Weight</th>
-			<th scope="col">Score</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in product_list_append %}
-        <tr>
-            <td>{{item['productname']}}</td>
-            <td>{{item['cost']}}</td>
-            <td>{{item['country']}}</td>
-            <td>{{item['material1']}}</td>
-            <td>{{item['percentage1']}}</td>
-			<td>{{item['material2']}}</td>
-            <td>{{item['percentage2']}}</td>
-			<td>{{item['weight']}}</td>
-            <td>{{item['score']}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDtLAo9acn5vA1KoEixjTcjTESRz9L_X3A&q=local+shops" allowfullscreen>
+</iframe>
 
 {% endblock %}
