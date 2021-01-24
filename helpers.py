@@ -66,7 +66,7 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
     Ethical = round(ethmat + ethco,1)
 
     # Final Score
-    Score = round(Environ + 150*weight*weight/Ethical,1)
+    Score = round(Environ + 50*weight*weight/Ethical,1)
 
     # Score per kg
     kgscore = round(Score/weight,1)
