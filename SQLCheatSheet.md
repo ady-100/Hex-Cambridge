@@ -16,7 +16,7 @@
 		c.execute(SELECT * FROM products WHERE username = %s", (username,))
 		rows = c.fetchall()
 
-Then, rows will be a list with [username, country, material1...]. You can then use Flask to send this to a html file, making a list by looping over all of the rows.
+rows will be a list with [username, country, material1...]. You can then use Flask to send this to a html file, making a list by looping over all of the rows.
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
