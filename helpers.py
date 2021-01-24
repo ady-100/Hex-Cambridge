@@ -66,13 +66,13 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
     Ethical = round(ethmat + ethco,2)
 
     # Final Score
-    Score = round(Environ + 200*weight/Ethical,2)
+    Score = round(Environ + 150*weight/Ethical,2)
 
     # Score per kg
     kgscore = round(Score/weight,2)
 
     # Price per weight adjusted score
-    real_cost = round(float(cost) + Environ * 0.04 + 5*weight/Ethical ,2)
+    real_cost = round(float(cost) + Environ * 0.04 + 10*weight/Ethical ,2)
     colour = colourcode(kgscore)
     Al = [Environ, Ethical, Score, kgscore, real_cost, colour]
     
@@ -80,9 +80,9 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
 
 
 def colourcode(value):
-    if value > 50:
+    if value > 45:
         return "Red"
-    elif value > 40:
+    elif value > 35:
         return "Orange"
     else:
         return "Green"
