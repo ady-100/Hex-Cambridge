@@ -154,7 +154,7 @@ def EnvironAnalytics(productlistofdict):
         for row in csvdata:
             mat_data[row[0]] = [float(row[1])]
             
-   matco2 = []
+    matco2 = []
     for i in materials:
         matco2.append(mat_data[i][0])
     
