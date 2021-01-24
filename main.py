@@ -390,9 +390,9 @@ def analytics():
     c.execute("SELECT * FROM locations WHERE username = %s", (username,))
     companydetails = c.fetchall()
     
-    username = companydetails['username']
-    address = companydetails['latitude']
-    meanscore = companydetails['longitude']
+    username = companydetails[0]
+    address = companydetails[1]
+    meanscore = companydetails[2]
         
     conn.commit()
     conn.close()
