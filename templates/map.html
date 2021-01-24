@@ -18,18 +18,20 @@ Have a look round for your local businesses - and see if they're featured on thi
 </iframe>
 
 <table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Company</th>
-        </tr>
+  <thead>
+      <tr>
+          <th scope="col">Company Name</th>
+          <th scope="col">Company Address</th>
+      </tr>
     </thead>
-    <tbody>
-        {% for companyname in company_list %}
-        <tr>
-            <td>{{companyname}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <tbody>
+      {% for item in company_list_append %}
+      <tr>
+          <td>{item['companyname']}</td>
+          <td>{item['address']}</td>
+      </tr>
+      {% endfor %}
+  </tbody>  
 </table>
 
 {% endblock %}
