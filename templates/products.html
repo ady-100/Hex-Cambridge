@@ -24,8 +24,7 @@ Below are the products you have saved
 			<th scope="col">Minor Material</th>
 			<th scope="col">Percentage</th>
 			<th scope="col">Weight</th>
-			<th scope="col">Impact</th>
-      <th scope="col">Colour Code</th>
+			<th scope="col">ShopGreen Score</th>
         </tr>
     </thead>
     <tbody>
@@ -39,8 +38,13 @@ Below are the products you have saved
 			<td>{{item.material2}}</td>
             <td>{{item.percentage2}}</td>
 			<td>{{item.weight}}</td>
-            <td background-color: "{{item.colour}}" >{{item.score}}</td>
-	    <td>{{item.colour}}</td>
+			{% if {{item.colour}}=="green" %}
+				<td background-color: green >{{item.score}}</td>
+			{% elif {{item.colour}}=="red" %}
+				<td background-color: red >{{item.score}}</td>
+			{% elif {{item.colour}}=="orange" %}
+				<td background-color: red >{{item.score}}</td>
+			{% endif %}
         </tr>
         {% endfor %}
     </tbody>
