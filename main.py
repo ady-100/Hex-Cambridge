@@ -331,7 +331,7 @@ def products():
     c = conn.cursor()
     
     username = session["username"]
-    c.execute("SELECT * FROM products WHERE username = %s", (username,))
+    c.execute("SELECT * FROM products")
     productlist = c.fetchall()
     product_list_display = []
     
