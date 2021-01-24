@@ -161,7 +161,7 @@ def register():
         password_hash = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
 
         # Add user to database
-        c.execute("INSERT INTO users ('username', 'hash') VALUES (%s,%s)", (username, password_hash))
+        c.execute("INSERT INTO users ('username', 'password') VALUES (%s,%s)", (username, password_hash))
 
         # Save commit
         conn.commit()
