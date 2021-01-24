@@ -225,42 +225,43 @@ def data():
     costpy = request.form['cost']
     weightpy = request.form['weight']
 
-	with open('Countries_Data.csv', newline='') as csvfile:
-    	csvdata = csv.reader(csvfile, delimiter=',')
-     	co_data = {}
-     	for row in csvdata:
-         	co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
+	  with open('Countries_Data.csv', newline='') as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        co_data = {}
+        for row in csvdata:
+            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
 
-	with open('Materials_Data.csv', newline='') as csvfile:
-     	csvdata = csv.reader(csvfile, delimiter=',')
-     	mat_data = {}
-     	for row in csvdata:
-         	mat_data[row[0]] = [float(row[1])]
+	  with open('Materials_Data.csv', newline='') as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        mat_data = {}
+        for row in csvdata:
+            mat_data[row[0]] = [float(row[1])]
 
-	# Environmental Score
+    # Environmental Score
 
-	envmat = (((mat_data[material1py][0])*percent1py)+((mat_data[material2py][0])*percent2py)) * weightpy/100
-	envco = weightpy * 150e-6 * (co_data[countrypy][4])
-	Environ = envmat + envco 
+    envmat = (((mat_data[material1py][0])*percent1py)+((mat_data[material2py][0])*percent2py)) * weightpy/100
+    envco = weightpy * 150e-6 * (co_data[countrypy][4])
+    Environ = envmat + envco 
 
-	# Ethical Score
+    # Ethical Score
 
-	ethmat = 0
-	ethco = weightpy*((0.5)*((co_data[countrypy][0])/15)+(2/9)*((1-co_data[countrypy][1]+co_data[countrypy][2]+co_data[countrypy][3])/100))*100
-	Ethical = ethmat + ethco
+    ethmat = 0
+    ethco = weightpy*((0.5)*((co_data[countrypy][0])/15)+(2/9)*((1-co_data[countrypy][1]+co_data[countrypy][2]+co_data[countrypy][3])/100))*100
+    Ethical = ethmat + ethco
 
-	# Final Score
-	Score = Ethical/10 + 100/Environ
-	
-	# Score per kg
-	kgscore = Score/weightpy
+    # Final Score
+    Score = Ethical/10 + 100/Environ
 
-	# Price per weight adjusted score
-	cost_effectivness = kgscore/costpy
+    # Score per kg
+    kgscore = Score/weightpy
 
-	colour = colourcode(kgscore)
+    # Price per weight adjusted score
+    cost_effectivness = kgscore/costpy
+
+    colour = colourcode(kgscore)
 
     return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour)
+
 
 @app.route("/products")
 def products():
