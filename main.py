@@ -426,6 +426,7 @@ def analytics():
         username = session['username']
         c.execute("SELECT * FROM locations WHERE username = %s", (username,))
         companydetails = c.fetchall()
+        meanscore1 = 42
         
         for item in companydetails:
             username = item['username']
