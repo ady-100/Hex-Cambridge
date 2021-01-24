@@ -85,3 +85,13 @@ def colourcode(value):
         return "Orange"
     else:
         return "Green"
+    
+def FinancialAnalytics(transactions):
+    for item in transactions:
+        username = item['username']
+        value = item['value']
+        datetime = item['date']
+        tag = item['tag']
+        # Do stuff and return a number
+        return 42
+    

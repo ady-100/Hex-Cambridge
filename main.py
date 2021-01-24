@@ -8,7 +8,7 @@ import pymysql
 import csv
 from statistics import mean
 
-from helpers import apology, login_required, Algorithm, colourcode
+from helpers import apology, login_required, Algorithm, colourcode, FinancialAnalytics
 
 # Configure application
 app = Flask(__name__)
@@ -395,25 +395,52 @@ def map():
 @app.route("/analytics")
 def analytics():
     
-    # Initialise
-    analytics_data = []
-    conn = open_connection()
-    c = conn.cursor()
-    
-    # Retrieve mean score
-    username = session['username']
-    c.execute("SELECT * FROM locations WHERE username = %s", (username,))
-    companydetails = c.fetchall()
-    
-    for item in companydetails:
-        username = item['username']
-        address = item['latitude']
-        meanscore = item['longitude']
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
         
-    conn.commit()
-    conn.close()
-    
-    return render_template("analytics.html")
+        # Setup database entry
+        conn = open_connection()
+        c = conn.cursor()
+        username = session['username']
+        
+        # Receive transaction data (FILL OUT WITH FORMS AND UPLOADS)
+        #value = 
+        #date = 
+        #tag = 
+        
+        # Save transaction data (CAN LOOP)
+        #c.execute("INSERT INTO transactions (username, value, date, tag) VALUES (%s,%s,%s,%s)", (username, value, date, tag))
+        
+        # Save commit
+        conn.commit()
+        conn.close()
+        
+    else:
+        
+        # Initialise
+        analytics_data = []
+        conn = open_connection()
+        c = conn.cursor()
+        
+        # Retrieve mean ShopGreen score
+        username = session['username']
+        c.execute("SELECT * FROM locations WHERE username = %s", (username,))
+        companydetails = c.fetchall()
+        
+        for item in companydetails:
+            username = item['username']
+            address = item['latitude']
+            meanscore = item['longitude']
+            
+        # Receive analytics data
+        c.execute("SELECT * FROM transactions WHERE username = %s", (username,))
+        companytransactions = c.fetchall()
+        financedata = FinancialAnalytics(companytransactions)
+            
+        conn.commit()
+        conn.close()
+        
+        return render_template("analytics.html")
 
 
 if __name__ == '__main__':
