@@ -226,7 +226,7 @@ def productadd():
 def contact_py():
     return render_template('contact.html')
 
-@app.route('/contact.html', methods=['POST'])
+@app.route('/contact', methods=['POST'])
 def Query():
     # get data from the test HTML form, at URL /contact, sending data to /contact using the below python
     query = request.form['query']
