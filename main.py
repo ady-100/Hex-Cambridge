@@ -6,8 +6,9 @@ import sqlite3
 import os
 import pymysql
 import csv
+from statistics import mean
 
-from helpers import apology, login_required
+from helpers import apology, login_required, Algorithm, colourcode
 
 # Configure application
 app = Flask(__name__)
@@ -63,6 +64,31 @@ def root():
 def about():
     """Show about us section"""
     return render_template('about.html')
+
+def meanscoreupdate(c, conn, returntrue):
+    
+    # Query database for username
+    username = session['username']
+    c.execute("SELECT * FROM products WHERE username = %s", (username,))
+
+    productlist = c.fetchall()
+    weightedscore = []
+    
+    for item in productlist:
+        weight = item["weight"]
+        score = item["score"]
+        weightedscore.append(float(score)/float(weight))
+    meanscore = mean(weightedscore)
+    
+    c.execute("UPDATE locations SET longitude = %s WHERE username = %s",(meanscore, username))
+    conn.commit()
+    
+    if returntrue:
+        return meanscore
+    
+    
+    
+    
  
 # Login
 @app.route("/login", methods=["GET", "POST"])
@@ -205,61 +231,12 @@ def check():
         return jsonify(False), 400
     else:
         return jsonify(True), 200
-    
 
-	
 	
 @app.route('/test_form')
 def test_form():
     return render_template('test_form.html')
-
-def colourcode(value):
-    if value > 50:
-        return "Red"
-    elif value > 40:
-        return "Orange"
-    else:
-        return "Green"
-
-def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
-    with open('Countries_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        co_data = {}
-        for row in csvdata:
-            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
-
-    with open('Materials_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        mat_data = {}
-        for row in csvdata:
-            mat_data[row[0]] = [float(row[1])]
-            
-    # Environmental Score
-    envmat1 = (((mat_data[str(material1)][0])*percent1)+((mat_data[str(material2)][0])*percent2))
-    envmat = envmat1*weight/100
-    envco = weight * 150e-6 * (co_data[country][4])
-    Environ = round(envmat + envco,2) 
-
-    # Ethical Score
-
-    ethmat = 0
-    ethco = weight*((0.5)*((co_data[country][0])/15)+(2/9)*((1-co_data[country][1]+co_data[country][2]+co_data[country][3])/100))*100
-    Ethical = round(ethmat + ethco,2)
-
-    # Final Score
-    Score = round(Environ + 200*weight/Ethical,2)
-
-    # Score per kg
-    kgscore = round(Score/weight,2)
-
-    # Price per weight adjusted score
-    real_cost = round(float(cost) + Environ * 0.04 + 5*weight/Ethical ,2)
-    colour = colourcode(kgscore)
-    Al = [Environ, Ethical, Score, kgscore, real_cost, colour]
     
-    return Al
-
-
 
 @app.route('/data', methods=['POST'])
 def data():
@@ -352,9 +329,12 @@ def productadd():
         # Add user to database
         username = session["username"]
         c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2]))
-        
-        # Save commit
         conn.commit()
+        
+        # Update meanscore
+        meanscoreupdate(c,conn, False)
+        # Save commit
+
         conn.close()
         
         # Redirect user to login page if username is valid
@@ -383,15 +363,17 @@ def map():
     productlist = c.fetchall()
     company_list = []
     
+    
     for item in productlist:
         username = item['username']
         address = item['latitude']
-        an_item = dict(companyname = username, address = address)
+        meanscore = item['longitude']
+        an_item = dict(companyname = username, address = address, meanscore = meanscore)
         company_list.append(an_item)
         
-    # Save commit
     conn.commit()
     conn.close()
+        
     
     return render_template("map.html", company_list = company_list)
 
@@ -400,7 +382,21 @@ def analytics():
     
     # Initialise
     analytics_data = []
-    # Score Analytics
+    conn = open_connection()
+    c = conn.cursor()
+    
+    # Retrieve mean score
+    username = session['username']
+    c.execute("SELECT * FROM locations WHERE username = %s", (username,))
+    companydetails = c.fetchall()
+    
+    username = companydetails['username']
+    address = companydetails['latitude']
+    meanscore = companydetails['longitude']
+        
+    conn.commit()
+    conn.close()
+    
     
     return render_template("analytics.html", analytics_data)
 
