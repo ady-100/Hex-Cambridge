@@ -238,8 +238,8 @@ def data():
             mat_data[row[0]] = [float(row[1])]
 
     # Environmental Score
-
-    envmat1 = (((mat_data[material1py][0])*percent1py)+((mat_data[material2py][0])*percent2py))
+    
+    envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
     envmat = envmat1*weightpy/100
     envco = weightpy * 150e-6 * (co_data[countrypy][4])
     Environ = envmat + envco 
