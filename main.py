@@ -322,7 +322,7 @@ def products():
         percentage2 = item["percentage2"]
         weight = item["weight"]
         score = item["score"]
-        colour = colourcode(score/weight)
+        colour = colourcode(float(score)/float(weight))
         
         an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score, colour= colour)
         product_list_display.append(an_item)
