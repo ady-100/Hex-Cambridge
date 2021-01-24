@@ -352,7 +352,7 @@ def products():
     conn.commit()
     conn.close()
     
-    temp_list = {'productname': productname, 'cost': cost, 'country': country, 'material1': material1, 'percentage1': percentage1, 'material2': material2, 'percentage2': percentage2, 'weight': weight, 'score': score}
+    temp_list = {'productname': "a", 'cost': "a", 'country': "country", 'material1': "material1", 'percentage1': "percentage1", 'material2': "material2", 'percentage2': "percentage2", 'weight': "weight", 'score': "score"}
     
     return render_template("products.html", product_list_display = temp_list)
 
