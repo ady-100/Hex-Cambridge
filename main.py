@@ -464,7 +464,7 @@ def analytics():
         #Enivonmental Analytics
         conn = open_connection()
         c = conn.cursor()
-    
+        
         username = session["username"]
         c.execute("SELECT * FROM products WHERE username = %s", (username,))
         productlist = c.fetchall()
@@ -494,18 +494,17 @@ def analytics():
                 green = False
                 red = False
                 orange = True
-            
+                
             an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score, colour= colour, green = green, red = red, orange = orange)
             product_list_display.append(an_item)
-        
+            
         # Save commit
         conn.commit()
         conn.close()
         env = EnvironAnalytics(product_list_display)
         environdata = {'mean score':str(env[0]), 'mean distance':str(env[4]), 'mean CO2':str(env[9])}
         return render_template("analytics.html", content = analyticsdata)
-
-
+    
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
