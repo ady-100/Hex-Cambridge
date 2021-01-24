@@ -30,15 +30,15 @@ Below are the products you have saved
     <tbody>
         {% for item in product_list_append %}
         <tr>
-            <td>{{item['productname']}}</td>
-            <td>{{item['cost']}}</td>
-            <td>{{item['country']}}</td>
-            <td>{{item['material1']}}</td>
-            <td>{{item['percentage1']}}</td>
-			<td>{{item['material2']}}</td>
-            <td>{{item['percentage2']}}</td>
-			<td>{{item['weight']}}</td>
-            <td>{{item['score']}}</td>
+            <td>{item['productname']}</td>
+            <td>{item['cost']}</td>
+            <td>{item['country']}</td>
+            <td>{item['material1']}</td>
+            <td>{item['percentage1']}</td>
+			<td>{item['material2']}</td>
+            <td>{item['percentage2']}</td>
+			<td>{item['weight']}</td>
+            <td>{item['score']}</td>
         </tr>
         {% endfor %}
     </tbody>
