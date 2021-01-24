@@ -461,7 +461,9 @@ def analytics():
         conn.commit()
         conn.close()
         
-        return render_template("analytics.html", analyticsdata)
+        analyticsdata = {'financialdata':financialdata, 'environmentaldata':environmentaldata, 'booleandata':booleandata}
+        
+        return render_template("analytics.html", content = analyticsdata)
 
 
 if __name__ == '__main__':
