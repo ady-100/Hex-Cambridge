@@ -8,7 +8,7 @@
 * products has columns: username, country, material1, percentage1, material2, percentage2, cost, weight
 
 --------------------------------------------------------------------------------
-##To set up a search (e.g. search for products from username = tesco)
+## To set up a search (e.g. search for products from username = tesco)
 
 		username = tesco
 		conn = open_connection()
@@ -20,7 +20,7 @@ Then, rows will be a list with [username, country, material1...]. You can then u
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-##To write to a database
+## To write to a database
 
 		lat = 01
 		long = 02
@@ -28,7 +28,7 @@ Then, rows will be a list with [username, country, material1...]. You can then u
 		c = conn.cursor()
         c.execute("INSERT INTO locations (username, latitude, longitude) VALUES (%s,%s,%s)", (username, lat,long))
 -------------------------------------------------------------------------------
-##To perform a more specific search
+## To perform a more specific search
 
 		username = tesco
 		cost = str(90)
