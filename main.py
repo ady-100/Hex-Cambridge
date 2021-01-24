@@ -317,8 +317,35 @@ def dataadd():
 
 @app.route("/products")
 def products():
-    return render_template("products.html")
+    """Show list of products"""
     
+    conn = open_connection()
+    c = conn.cursor()
+    
+    username = session["username"]
+    c.execute("SELECT * FROM products WHERE username = %s", (username,))
+    productlist = c.fetchall()
+    product_list_display = []
+    
+    for item in productlist:
+        productname = item["productname"]
+        cost = item["cost"]
+        country = item["country"]
+        material1 = item["material1"]
+        percentage1 = item["percentage1"]
+        material2 = item["material2"]
+        percentage2 = item["percentage2"]
+        weight = item["weight"]
+        score = item["score"]
+        
+        product_list_display.append({'productname': productname, 'cost': cost, 'country': country, 'material1': material1, 'percentage1': percentage1, 'material2': material2, 'percentage2': percentage2, 'weight': weight, 'score': score})
+        
+    # Save commit
+    conn.commit()
+    conn.close()
+    
+    return render_template("products.html", product_list_display = product_list_display)
+
 @app.route("/productadd")
 def productadd():
     return render_template('productadd.html')
