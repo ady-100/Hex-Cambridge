@@ -199,6 +199,8 @@ def check():
         return jsonify(True), 200
     
 
+	
+	
 @app.route('/test_form')
 def test_form():
     return render_template('test_form.html')
@@ -221,8 +223,15 @@ def productadd():
     return render_template('productadd.html')
 
 @app.route("/contact")
-def conact_py():
+def contact_py():
     return render_template('contact.html')
+
+@app.route('/contact', methods=['POST'])
+def Query():
+    # get data from the test HTML form, at URL /contact, sending data to /contact using the below python
+    query = request.form['query']
+    email_ = request.form['email']
+    return render_template("contact.html", output1=email, output2=query)
 
 @app.route("/map")
 def map():
