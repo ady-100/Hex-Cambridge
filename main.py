@@ -219,11 +219,11 @@ def data():
     # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
     countrypy = request.form['country']
     material1py = request.form['material1']
-    percent1py = request.form['percent1']
+    percent1py = float(request.form['percent1'])
     material2py = request.form['material2']
-    percent2py = request.form['percent2']
+    percent2py = float(request.form['percent2'])
     costpy = request.form['cost']
-    weightpy = request.form['weight']
+    weightpy = float(request.form['weight'])
 
     with open('Countries_Data.csv', newline='') as csvfile:
         csvdata = csv.reader(csvfile, delimiter=',')
@@ -239,7 +239,8 @@ def data():
 
     # Environmental Score
 
-    envmat = (((mat_data[material1py][0])*int(percent1py))+((mat_data[material2py][0])*int(percent2py))) * int(weightpy)/100
+    envmat1 = (((mat_data[material1py][0])*percent1py)+((mat_data[material2py][0])*percent2py))
+    envmat = envmat1*weightpy
     envco = weightpy * 150e-6 * (co_data[countrypy][4])
     Environ = envmat + envco 
 
