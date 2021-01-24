@@ -3,6 +3,8 @@ import datetime
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
+import os
+import pymysql
 
 from helpers import apology, login_required
 
@@ -50,7 +52,7 @@ def about():
 def login():
     """Log user in"""
     
-    conn = sqlite3.connect('Database1.db')
+    conn = open_connection()
     c = conn.cursor()
 
     # Forget any user_id
@@ -110,7 +112,7 @@ def register():
     # Forget any user_id
     session.clear()
     
-    conn = sqlite3.connect('Database1.db')
+    conn = open_connection()
     c = conn.cursor()
 
     # User reached route via POST (as by submitting a form via POST)
@@ -161,7 +163,7 @@ def register():
 def check():
     """Return true if username available, else false, in JSON format"""
     
-    conn = sqlite3.connect('Database1.db')
+    conn = open_connection()
     c = conn.cursor()
     
     username = request.args.get("username",'')
