@@ -88,7 +88,7 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = c.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = c.execute("SELECT * FROM users WHERE username = ?", str(request.form.get("username")))
         rows = rows.fetchall()
         
         # Ensure username exists and password is correct
