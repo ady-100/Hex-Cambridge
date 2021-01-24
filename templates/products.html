@@ -38,13 +38,7 @@ Below are the products you have saved
 			<td>{{item.material2}}</td>
             <td>{{item.percentage2}}</td>
 			<td>{{item.weight}}</td>
-			{% if item.green %}
-				<td>{{item.score}}</td>
-			{% elif item.red %}
-				<td>{{item.score}}</td>
-			{% elif item.orange %}
-				<td>{{item.score}}</td>
-			{% endif %}
+			<td>{{item.score}}</td>
         </tr>
         {% endfor %}
     </tbody>
