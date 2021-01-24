@@ -80,9 +80,9 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
 
 
 def colourcode(value):
-    if value > 45:
+    if value > 55:
         return "Red"
-    elif value > 35:
+    elif value > 40:
         return "Orange"
     else:
         return "Green"
