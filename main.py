@@ -264,7 +264,7 @@ def data():
     colour = colourcode(kgscore)
 
     if colour == "Green":
-        colourimg = "https://colourlex.com/wp-content/uploads/2015/01/Emerald_green_painted_swatch_Muntwyler-225-s.jpg"
+        colourimg = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Dark_green.svg/1200px-Dark_green.svg.png"
     elif colour == "Orange":
         colourimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAA1BMVEX/XgA92nntAAAASElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AcUIAAFkqh/QAAAAAElFTkSuQmCC"
     else:
