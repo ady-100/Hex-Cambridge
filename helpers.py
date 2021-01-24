@@ -95,16 +95,18 @@ def FinancialAnalytics(transactions):
         datetime = item['date']
         tag = item['tag']
         valuelist.append(value)
+        
+    # Test data for demonstration purposes
     mean1 = 100
     median1 = 90
     mode1 = 70
-    mean1 = mean(valuelist)
-    median1 = median(valuelist)
-    mode1 = mode(valuelist)
+    #mean1 = mean(valuelist)
+    #median1 = median(valuelist)
+    #mode1 = mode(valuelist)
     return [mean1, median1, mode1]
         
     
-
+"""
 def EnvironAnalytics(productlistofdict):
     score = []
     for dic in productlistofdict:
@@ -180,3 +182,4 @@ def EnvironAnalytics(productlistofdict):
     
     
     return [mean_score, range_score, median_score, IQR_score, mean_country, range_country, median_country, IQR_country, mode_country, mean_matco2, range_matco2, median_matco2, IQR_matco2, mode_matco2]
+"""
