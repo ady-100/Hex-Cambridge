@@ -353,7 +353,7 @@ def productadd():
         
         # Add user to database
         username = session["username"]
-        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score, colour) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2], A[5]))
+        c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2]))
         
         # Save commit
         conn.commit()
