@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geocoding Service</title>
+    <p id="address" value="Edinburgh"></p>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM--4xkg33-Fn5zLmOjWs1jcg10zZxF_c&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
+    <script>
+        var the_address = "Edinburgh";
+
+        function initialize(){
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(54.55, -2.43);
+            var mapOptions = {
+                zoom: 8,
+                centre: latlng,
+            }
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            codeAddress(the_address);
+        }
+
+        function codeAddress(address){
+            geocoder.geocode( {address:address}, function(results,status){
+                if (status === 'OK'){
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    })
+                } else{
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
