@@ -95,3 +95,76 @@ def FinancialAnalytics(transactions):
         # Do stuff and return a number
         return 42
     
+    
+def EnvironAnalytics(productlistofdict):
+    score = []
+    for dic in productlistofdict:
+        score.append(productlistofdict[dic]['score'])
+        # returns list of scores
+        
+    countries = []
+    for dic in productlistofdict:
+        countries.append(productlistofdict[dic]['country'])
+        # returns list of countries of origin
+    
+    materials = []
+    for dic in productlistofdict:
+        materials.append(productlistofdict[dic]['material1'])
+        # returns list of major materials
+        
+    sum = 0
+    for i in score:
+        sum += i
+     
+    # Calculate basic analytics
+    mean_score = sum/len(score)
+    median_score = median(score)
+    range = max(score) - min(score)
+    Q1_score = np.percentile(data, 25, interpolation = 'midpoint') 
+    Q3_score = np.percentile(data, 75, interpolation = 'midpoint') 
+    IQR_score = Q3_score - Q1_score
+    
+    # Read in country data and find distances, then do the same and get basic data on distances. Also return mode of country of origin. 
+    
+    with open('Countries_Data.csv', newline='') as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        co_data = {}
+        for row in csvdata:
+            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
+    
+    country = []
+    for i in countries:
+        country.append(co_data[i][4])
+    
+    mean_country = sum/len(country)
+    median_country = median(country)
+    range_country = max(country) - min(country)
+    Q1_country = np.percentile(data, 25, interpolation = 'midpoint') 
+    Q3_country = np.percentile(data, 75, interpolation = 'midpoint') 
+    IQR_country = Q3_country - Q1_country
+    mode_country = mode(countries)
+    
+    
+    # Do the same thing for materials with their CO2 eq. data
+    
+    with open('Materials_Data.csv', newline='') as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        mat_data = {}
+        for row in csvdata:
+            mat_data[row[0]] = [float(row[1])]
+            
+   matco2 = []
+    for i in materials:
+        matco2.append(mat_data[i][0])
+    
+    mean_matco2 = sum/len(matco2)
+    median_matco2 = median(matco2)
+    range_matco2 = max(matco2) - min(matco2)
+    Q1_matco2 = np.percentile(data, 25, interpolation = 'midpoint') 
+    Q3_matco2 = np.percentile(data, 75, interpolation = 'midpoint') 
+    IQR_matco2 = Q3_matco2 - Q1_matco2
+    mode_matco2 = mode(materials)
+    
+    
+    return [mean_score, range_score, median_score, IQR_score, mean_country, range_country, median_country, IQR_country, mode_country, mean_matco2, range_matco2, median_matco2, IQR_matco2, mode_matco2]
+    
