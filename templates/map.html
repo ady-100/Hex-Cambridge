@@ -33,7 +33,15 @@ Have a look round for your local businesses - and see if they're featured on thi
       <tr>
           <td>{{item.companyname}}</td>
           <td>{{item.address}}</td>
-		  <td>{{item.meanscore}}</td>
+			{% if item.green %}
+				<td style = "background-color: green;color:white;" >{{item.score}}</td>
+			{% elif item.red %}
+				<td style = "background-color: red;color:white;" >{{item.score}}</td>
+			{% elif item.orange %}
+				<td style = "background-color: orange;color:white;" >{{item.score}}</td>
+			{% else %}
+				<td>{{item.score}}</td>
+			{% endif %}
       </tr>
       {% endfor %}
   </tbody>  
