@@ -228,10 +228,7 @@ def contact_py():
 
 @app.route('/contact', methods=['POST'])
 def Query():
-    # get data from the test HTML form, at URL /contact, sending data to /contact using the below python
-    query = request.form['query']
-    email_ = request.form['email']
-    return render_template("contact.html", output1=email, output2=query)
+    return render_template("products.html")
 
 @app.route("/map")
 def map():
