@@ -228,8 +228,7 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
         mat_data = {}
         for row in csvdata:
             mat_data[row[0]] = [float(row[1])]
-		
-
+            
     # Environmental Score
     envmat1 = (((mat_data[str(material1)][0])*percent1)+((mat_data[str(material2)][0])*percent2))
     envmat = envmat1*weight/100
