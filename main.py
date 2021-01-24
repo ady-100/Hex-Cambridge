@@ -466,9 +466,8 @@ def analytics():
 	
 	#Enivonmental Analytics
 	env = EnvironAnalytics(product_list_display)
-	
+	environdata = {'mean score':str(env[0]), 'mean distance':str(env[4]), 'mean CO2':str(env[9])}
         
-	
         return render_template("analytics.html", content = analyticsdata)
 
 
