@@ -318,14 +318,12 @@ def products():
         weight = item["weight"]
         score = item["score"]
         
-        product_list_display.append({'productname': productname, 'cost': cost, 'country': country, 'material1': material1, 'percentage1': percentage1, 'material2': material2, 'percentage2': percentage2, 'weight': weight, 'score': score})
+        an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score)
+        product_list_display.append(an_item)
         
     # Save commit
     conn.commit()
     conn.close()
-    
-    temp_list = {'productname': "a", 'cost': "a", 'country': "country", 'material1': "material1", 'percentage1': "percentage1", 'material2': "material2", 'percentage2': "percentage2", 'weight': "weight", 'score': "score"}
-    product_list_display = temp_list
     
     return render_template("products.html", product_list_display = product_list_display)
 
