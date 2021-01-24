@@ -398,7 +398,7 @@ def analytics():
     conn.commit()
     conn.close()
     
-    return render_template("analytics.html", analytics_data)
+    return render_template("analytics.html")
 
 
 if __name__ == '__main__':
