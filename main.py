@@ -229,9 +229,12 @@ def productadd():
 def contact_py():
     return render_template('contact.html')
 
-@app.route('/products', methods=['POST'])
-def Query():
-    return render_template("products.html")
+@app.route('/query', methods=['POST'])
+def query():
+# get data from the contact HTML form, at URL /contact, sending data to /query using the below python
+    querypy = request.form['query']
+    emailpy = request.form['email']
+    return render_template("data.html", output1=querypy, output2=emailpy)
 
 @app.route("/map")
 def map():
