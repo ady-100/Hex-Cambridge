@@ -209,12 +209,53 @@ def test_form():
     return render_template('test_form.html')
 
 def colourcode(value):
-    if value > 10:
-        return "Green"
-    elif value > 6:
+    if value > 50:
+        return "Red"
+    elif value > 40:
         return "Orange"
     else:
-        return "Red"
+        return "Green"
+
+def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
+	with open('Countries_Data.csv', newline='') as csvfile:
+		csvdata = csv.reader(csvfile, delimiter=',')
+		co_data = {}
+		for row in csvdata:
+		    co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
+
+	with open('Materials_Data.csv', newline='') as csvfile:
+		csvdata = csv.reader(csvfile, delimiter=',')
+		mat_data = {}
+		for row in csvdata:
+		    mat_data[row[0]] = [float(row[1])]
+		
+
+	    # Environmental Score
+    
+	    envmat1 = (((mat_data[str(material1)][0])*percent1)+((mat_data[str(material2)][0])*percent2))
+	    envmat = envmat1*weight/100
+	    envco = weight * 150e-6 * (co_data[country][4])
+	    Environ = round(envmat + envco,2) 
+
+	    # Ethical Score
+
+	    ethmat = 0
+	    ethco = weight*((0.5)*((co_data[country][0])/15)+(2/9)*((1-co_data[country][1]+co_data[country][2]+co_data[country][3])/100))*100
+	    Ethical = ethmat + ethco
+
+	    # Final Score
+	    Score = round(Environ + 200*weight/Ethical,2)
+
+	    # Score per kg
+	    kgscore = round(Score/weight,2)
+
+	    # Price per weight adjusted score
+	    cost_effectivness = round(kgscore/float(cost),2)
+
+	    colour = colourcode(kgscore)
+	
+	return [Environ, Ethical, Score, kgscore, cost_effectivness, colour]
+
 
 @app.route('/data', methods=['POST'])
 def data():
@@ -227,50 +268,16 @@ def data():
     costpy = float(request.form['cost'])
     weightpy = float(request.form['weight'])
 
-    with open('Countries_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        co_data = {}
-        for row in csvdata:
-            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
-
-    with open('Materials_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        mat_data = {}
-        for row in csvdata:
-            mat_data[row[0]] = [float(row[1])]
-
-    # Environmental Score
-    
-    envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
-    envmat = envmat1*weightpy/100
-    envco = weightpy * 150e-6 * (co_data[countrypy][4])
-    Environ = envmat + envco 
-
-    # Ethical Score
-
-    ethmat = 0
-    ethco = weightpy*((0.5)*((co_data[countrypy][0])/15)+(2/9)*((1-co_data[countrypy][1]+co_data[countrypy][2]+co_data[countrypy][3])/100))*100
-    Ethical = ethmat + ethco
-
-    # Final Score
-    Score = Ethical/10 + 100/Environ
-
-    # Score per kg
-    kgscore = Score/weightpy
-
-    # Price per weight adjusted score
-    cost_effectivness = kgscore/float(costpy)
-
-    colour = colourcode(kgscore)
-
-    if colour == "Green":
-        colourimg = "https://colourlex.com/wp-content/uploads/2015/01/Emerald_green_painted_swatch_Muntwyler-225-s.jpg"
-    elif colour == "Orange":
+    A = Algorithm(countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy)
+		
+    if A[5] == "Green":
+        colourimg = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Dark_green.svg/1200px-Dark_green.svg.png"
+    elif A[5] == "Orange":
         colourimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAA1BMVEX/XgA92nntAAAASElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AcUIAAFkqh/QAAAAAElFTkSuQmCC"
     else:
         colourimg = "https://professionals.tarkett.com/media/img/M/TH_3917011_3707003_3708011_3912011_3914011_800_800.jpg"
 
-    return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colourimg)
+    return render_template("data.html", output1=A[0], output2=A[1], output3=A[2], output4=A[3], output5=A[4], output6=colourimg)
 
 @app.route('/dataadd', methods=['POST'])
 def dataadd():
@@ -284,43 +291,9 @@ def dataadd():
     costpy = float(request.form['cost'])
     weightpy = float(request.form['weight'])
 
-    with open('Countries_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        co_data = {}
-        for row in csvdata:
-            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
+    A = Algorithm(countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy)
 
-    with open('Materials_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        mat_data = {}
-        for row in csvdata:
-            mat_data[row[0]] = [float(row[1])]
-
-    # Environmental Score
-    
-    envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
-    envmat = envmat1*weightpy/100
-    envco = weightpy * 150e-6 * (co_data[countrypy][4])
-    Environ = envmat + envco 
-
-    # Ethical Score
-
-    ethmat = 0
-    ethco = weightpy*((0.5)*((co_data[countrypy][0])/15)+(2/9)*((1-co_data[countrypy][1]+co_data[countrypy][2]+co_data[countrypy][3])/100))*100
-    Ethical = ethmat + ethco
-
-    # Final Score
-    Score = Ethical/10 + 100/Environ
-
-    # Score per kg
-    kgscore = Score/weightpy
-
-    # Price per weight adjusted score
-    cost_effectivness = kgscore/float(costpy)
-
-    colour = colourcode(kgscore)
-
-    return render_template("dataadd.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour, output7=pronamepy)
+    return render_template("dataadd.html", output1=A[0], output2=A[1], output3=A[2], output4=A[3], output5=A[4], output6=A[5], output7=pronamepy)
 
 
 @app.route("/products")
