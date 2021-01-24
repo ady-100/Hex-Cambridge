@@ -90,7 +90,6 @@ def login():
         # Query database for username
         username = request.form.get("username")
         rows = c.execute("SELECT * FROM users WHERE username = %s", (username,))
-        rows = rows.fetchall()
         
         # Ensure username exists and password is correct
         password = request.form.get("password")
