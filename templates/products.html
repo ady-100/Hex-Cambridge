@@ -46,6 +46,8 @@ Below are the products you have saved. The ShopGreen score indicates their overa
 				<td style = "background-color: red;color:white;" >{{item.score}}</td>
 			{% elif orange %}
 				<td style = "background-color: orange;color:white;" >{{item.score}}</td>
+			{% else %}
+				<td>{{item.score}}</td>
 			{% endif %}
         </tr>
         {% endfor %}
