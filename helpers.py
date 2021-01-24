@@ -113,12 +113,16 @@ def EnvironAnalytics(productlistofdict):
         materials.append(productlistofdict[dic]['material1'])
         # returns list of major materials
         
-    sum = 0
-    for i in score:
-        sum += i
+    weights = []
+    for dic in productlistofdict:
+        weights.append(productlistofdict[dic]['weight'])
+        # returns list of weights
+        
+    for i in range(len(score)):
+        score[i] = score[i]/weights[i]
      
     # Calculate basic analytics
-    mean_score = sum/len(score)
+    mean_score = sum(score) / float(len(score))
     median_score = median(score)
     range = max(score) - min(score)
     Q1_score = np.percentile(data, 25, interpolation = 'midpoint') 
@@ -137,7 +141,7 @@ def EnvironAnalytics(productlistofdict):
     for i in countries:
         country.append(co_data[i][4])
     
-    mean_country = sum/len(country)
+    mean_country = sum(country) / float(len(country))
     median_country = median(country)
     range_country = max(country) - min(country)
     Q1_country = np.percentile(data, 25, interpolation = 'midpoint') 
@@ -158,7 +162,7 @@ def EnvironAnalytics(productlistofdict):
     for i in materials:
         matco2.append(mat_data[i][0])
     
-    mean_matco2 = sum/len(matco2)
+    mean_matco2 = sum(country) / float(len(country))
     median_matco2 = median(matco2)
     range_matco2 = max(matco2) - min(matco2)
     Q1_matco2 = np.percentile(data, 25, interpolation = 'midpoint') 
