@@ -430,8 +430,8 @@ def analytics():
         for item in companydetails:
             username = item['username']
             address = item['latitude']
-            meanscore = item['longitude']
-        environmentaldata = dict(meanscore = meanscore)
+            meanscore1 = item['longitude']
+        environmentaldata = dict(meanscore = meanscore1)
         analyticsdata.append(environmentaldata)
         
         # Receive analytics data
@@ -455,7 +455,7 @@ def analytics():
             MEANmedian = True
             MEDIANmean = False
         
-        booleandata = dict(MEDIANmean, MEANmedian)
+        booleandata = [MEDIANmean, MEANmedian]
         analyticsdata.append(booleandata)
             
         conn.commit()
