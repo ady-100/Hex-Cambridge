@@ -444,18 +444,18 @@ def analytics():
         mean = 100
         median = 110
         mode = 50
-        financialdata = dict(mean = mean, median = median, mode = mode)
+        financialdata = dict(mean=str(mean), median=str(median), mode = str(mode))
         analyticsdata.append(financialdata)
         
         # Generate boolean facts
-        if financialdata.median>financialdata.mean:
+        if float(financialdata['median'])>float(financialdata['mean']):
             MEDIANmean = True
             MEANmedian = False
         else:
             MEANmedian = True
             MEDIANmean = False
         
-        booleandata = dict(MEDIANmean = MEDIANmean, MEANmedian = MEANmedian)
+        booleandata = dict(MEDIANmean, MEANmedian)
         analyticsdata.append(booleandata)
             
         conn.commit()
