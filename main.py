@@ -207,12 +207,12 @@ def test_form():
     return render_template('test_form.html')
 
 def colourcode(value):
-	    if value > 10:
-		return "Green"
-	    elif value > 6:
-		return "Orange"
-	    else:
-		return "Red"
+    if value > 10:
+        return "Green"
+    elif value > 6:
+        return "Orange"
+    else:
+        return "Red"
 
 @app.route('/data', methods=['POST'])
 def data():
