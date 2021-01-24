@@ -8,7 +8,7 @@ import pymysql
 import csv
 from statistics import mean
 
-from helpers import apology, login_required, Algorithm, colourcode, FinancialAnalytics, EnvironAnalytics
+from helpers import apology, login_required, Algorithm, colourcode, FinancialAnalytics
 
 # Configure application
 app = Flask(__name__)
