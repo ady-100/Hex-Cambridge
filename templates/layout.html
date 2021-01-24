@@ -90,7 +90,6 @@
 	margin: 10px 0 0 44px;
 	text-indent:  -99999px;
 	width: 62px;
-	color: #FFFFFF;
 }
 
 #footer div div form {
@@ -236,7 +235,7 @@ p a:hover {
 	padding-top: 0;
 	width: 286px;
 }
-#content div#section div h1 {
+#content h1 {
 	color: #745b1b;
 	font-family: 'CarterOneRegular';
 	font-size: 33px;
@@ -674,11 +673,11 @@ p a:hover {
         </nav>
         
         
-        
+	<div id="content">
          <main class="container p-5">
             {% block main %}{% endblock %}
          </main>
-         
+	</div>
 
         
         
@@ -688,30 +687,24 @@ p a:hover {
 	<div id="footer">
 		<div>
 			<div class="first">
-				<h3>Get social with us!</h3>
+				<h3>Get in touch!</h3>
 				<p>
-					Feel free to contact us with any queries using any of the options below, or leave us a message on our contact us page!
+					Feel free to contact us with any queries using the form below:
 				</p>
 					<p>
-						<a href="/contact">Contact Us</a>
+						<a href="/contact" style="color:white;">Contact Us</a>
 					</p>
-					<p>
-						Telephone. : <span>12345678-90</span>
-					<br>
-						Fax : <span>23456789-01</span>
-					<br>
-						Email : <span>ask@ecothunder.com</span>
-					</p>
+
 			</div>
 			<div>
 				<h3>Explore our site!</h3>
 				<p>
-				  <a href="/">Home</a><br>
-                       		  <a href="/about">About Us</a><br>
-                      		  <a href="/map">Find a Company</a><br>
-                      		  <a href="/products">Product List</a><br>
-                      		  <a href="/productadd">Add Product</a><br>
-                        	  <a href="/test_form">Test form</a><br>	 
+				  <a href="/" style="color:white;">Home</a><br>
+                  <a href="/about" style="color:white;">About Us</a><br>
+                  <a href="/map" style="color:white;">Find a Company</a><br>
+                  <a href="/products" style="color:white;">Product List</a><br>
+                  <a href="/productadd" style="color:white;">Add Product</a><br>
+                  <a href="/test_form" style="color:white;">Test form</a><br>	 
 				</p>
 		  
 				
@@ -736,3 +729,4 @@ p a:hover {
     </body>
 
 </html>
+
