@@ -16,7 +16,7 @@
 		c.execute(SELECT * FROM products WHERE username = %s", (username,))
 		rows = c.fetchall()
 		conn.commit()
-       		conn.close()
+		conn.close()
 
 rows will be a list with [username, country, material1...]. You can then use Flask to send this to a html file, making a list by looping over all of the rows.
 --------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ rows will be a list with [username, country, material1...]. You can then use Fla
 		c = conn.cursor()
         	c.execute("INSERT INTO locations (username, latitude, longitude) VALUES (%s,%s,%s)", (username, lat,long))
 		conn.commit()
-       		conn.close()
+		conn.close()
 -------------------------------------------------------------------------------
 ## To perform a more specific search
 
@@ -41,5 +41,5 @@ rows will be a list with [username, country, material1...]. You can then use Fla
 		c.execute("SELECT * FROM products WHERE username = %s AND cost = %s", (username, cost))
 		searchoutput = c.fetchall() # This could be empty
 		conn.commit()
-       		conn.close()
+		conn.close()
 		
