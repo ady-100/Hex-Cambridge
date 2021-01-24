@@ -263,6 +263,56 @@ def data():
 
     return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour)
 
+@app.route('/dataadd', methods=['POST'])
+def data():
+    # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
+    pronamepy = request.form['proname']
+    countrypy = request.form['country']
+    material1py = request.form['material1']
+    percent1py = float(request.form['percent1'])
+    material2py = request.form['material2']
+    percent2py = float(request.form['percent2'])
+    costpy = float(request.form['cost'])
+    weightpy = float(request.form['weight'])
+
+    with open('Countries_Data.csv', newline='') as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        co_data = {}
+        for row in csvdata:
+            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
+
+    with open('Materials_Data.csv', newline='') as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        mat_data = {}
+        for row in csvdata:
+            mat_data[row[0]] = [float(row[1])]
+
+    # Environmental Score
+    
+    envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
+    envmat = envmat1*weightpy/100
+    envco = weightpy * 150e-6 * (co_data[countrypy][4])
+    Environ = envmat + envco 
+
+    # Ethical Score
+
+    ethmat = 0
+    ethco = weightpy*((0.5)*((co_data[countrypy][0])/15)+(2/9)*((1-co_data[countrypy][1]+co_data[countrypy][2]+co_data[countrypy][3])/100))*100
+    Ethical = ethmat + ethco
+
+    # Final Score
+    Score = Ethical/10 + 100/Environ
+
+    # Score per kg
+    kgscore = Score/weightpy
+
+    # Price per weight adjusted score
+    cost_effectivness = kgscore/float(costpy)
+
+    colour = colourcode(kgscore)
+
+    return render_template("dataadd.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour, output7=pronamepy)
+
 
 @app.route("/products")
 def products():
