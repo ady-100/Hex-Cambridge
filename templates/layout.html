@@ -698,13 +698,20 @@ p a:hover {
 			<div>
 				<h3>Explore our site!</h3>
 				<p>
+				{% if session["loggedin"] %}
 				  <a href="/" style="color:white;">Home</a><br>
                   <a href="/about" style="color:white;">About Us</a><br>
                   <a href="/map" style="color:white;">Find a Company</a><br>
-		  <a href="/test_form" style="color:white;">Consumer form</a><br>
+                  <a href="/test_form" style="color:white;">Consumer form</a><br>
                   <a href="/products" style="color:white;">Product List</a><br>
                   <a href="/productadd" style="color:white;">Add Product</a><br>	 
-				</p>
+				{% else %}
+				<a href="/" style="color:white;">Home</a><br>
+                <a href="/about" style="color:white;">About Us</a><br>
+                <a href="/map" style="color:white;">Find a Company</a><br>
+                <a href="/test_form" style="color:white;">Consumer form</a><br>
+				{% endif %}
+                </p>
 				
 			</div>
 			<div>
