@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    About Us
+    Analytics
 {% endblock %}
 
 {% block main %}
@@ -15,9 +15,33 @@
 
 <h3> Finance </h3>
 
-<p>
-    In finance, you will find data such as.....
-</p>
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th scope="col">Mean Transaction</th>
+			<th scope="col">Median Transaction</th>
+			<th scope="col">Mode Transaction</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in analyticsdata[1] %}
+			<tr>
+			<td>{{item.mean}}</td>
+			<td>{{item.median}}</td>
+			<td>{{item.mode}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p> What this means: </p>
+
+<ul>
+{% if [analyticsdata][2][0] %}
+	<li>Median is greater than Mean. This means your shop is operating well.</li>
+{% elif analyticsdata[2][1] %}
+  <li>Mean is greater than Median. This means you have a lot of small transactions, with a few customers spending a lot of money. Try to reduce the price of your more expensive items, to encourage the smaller customers to buy them.</li>
+</ul>
 
 
 <h3> Environmental </h3>
@@ -40,4 +64,72 @@
     <strong>3 - </strong>
 </p>
 
+
+<h3>Inputs (can hide)</h3>
+<form action="/analytics" method="post">
+  <label for="files">Select files to upload: </label>
+  
+      	<!-- upload multiple files -->
+            <form method="post" enctype="multipart/form-data">
+            <input type="file" name="my_file[]" multiple>
+            <input type="submit" value="Upload">
+        </form>
+        <?php
+            if (isset($_FILES['my_file'])) {
+                $myFile = $_FILES['my_file'];
+                $fileCount = count($myFile["name"]);
+
+                for ($i = 0; $i < $fileCount; $i++) {
+                    ?>
+                        <p>File #<?= $i+1 ?>:</p>
+                        <p>
+                            Name: <?= $myFile["name"][$i] ?><br>
+                            Temporary file: <?= $myFile["tmp_name"][$i] ?><br>
+                            Type: <?= $myFile["type"][$i] ?><br>
+                            Size: <?= $myFile["size"][$i] ?><br>
+                            Error: <?= $myFile["error"][$i] ?><br>
+                        </p>
+                    <?php
+                }
+            }
+        ?>
+        
+
+<!-- manual input form-->
+  <form method="post">
+    <div class="form-group">
+    <input type="text" class="form-control" name="stockbill" placeholder="Stock cost">
+    <!-- add the option to add more bills at once-->
+    </div>
+    
+    <div class="form-group">
+    <input class="form-control" type="date" name="billDate">
+    </div>
+     
+    <div style="text-align.center">
+    <input class="btn btn-primary"type="button" value="Submit" id="dynamicSubmit">
+	<!-- NB use of button type rather than submit -->
+		
+    <!-- make this more convenient than reclicking "submit"-->
+    
+    </div>
+    </form>
+
+  <div>
+
+    <font id="clickme">You have clicked: 0 times this session</font>
+
+    
+<script>
+//====================
+
+var target = document.getElementById("clickme"),
+  count = 0;
+target.onclick = function() {
+  count += 1;
+  target.innerHTML = "You have clicked: " + count + " times this session";
+};
+</script>
+  </div>
+  
 {% endblock %}
