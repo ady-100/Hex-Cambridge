@@ -1,14 +1,43 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Analytics
+    About Us
 {% endblock %}
 
 {% block main %}
 
-<p>    
-<h1> Analytics </h1>
-{{analytics_data}}
-</p>
+<head>
+    <h1>Analytics</h1>
+    
+    <style>
+    {
+        box-sizing: border-box;
+    }
+    /* Set additional styling options for the columns*/
+    .column {
+    float: left;
+    width: 50%;
+    }
+
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    </style>
+ </head>
+
+ <body>
+    <div class="row">
+        <div class="column">
+            <h2>Financial Analysis</h2>
+            <p>Data..., analytics..., formula...</p>
+        </div>
+        <div class="column">
+            <h2>Sustainable Analysis</h2>
+            <p>Data..., analytics..., formula...</p>
+        </div>
+    </div>
+ </body>
 
 {% endblock %}
