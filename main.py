@@ -368,7 +368,7 @@ def map():
         username = item['username']
         address = item['latitude']
         meanscore = item['longitude']
-        colour = colourcode(meanscore)
+        colour = colourcode(float(meanscore))
         
         if colour == "Green":
             green = True
