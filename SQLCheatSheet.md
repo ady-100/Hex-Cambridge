@@ -26,7 +26,7 @@ Then, rows will be a list with [username, country, material1...]. You can then u
 		long = 02
 		conn = open_connection()
 		c = conn.cursor()
-        c.execute("INSERT INTO locations (username, latitude, longitude) VALUES (%s,%s,%s)", (username, lat,long))
+        	c.execute("INSERT INTO locations (username, latitude, longitude) VALUES (%s,%s,%s)", (username, lat,long))
 -------------------------------------------------------------------------------
 ## To perform a more specific search
 
