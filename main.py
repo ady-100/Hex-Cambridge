@@ -206,6 +206,14 @@ def check():
 def test_form():
     return render_template('test_form.html')
 
+def colourcode(value):
+	    if value > 10:
+		return "Green"
+	    elif value > 6:
+		return "Orange"
+	    else:
+		return "Red"
+
 @app.route('/data', methods=['POST'])
 def data():
     # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
@@ -250,16 +258,9 @@ def data():
 	# Price per weight adjusted score
 	cost_effectivness = kgscore/costpy
 
-	def colourcode(value):
-	    if value > 10:
-		return "Green"
-	    elif value > 6:
-		return "Orange"
-	    else:
-		return "Red"
 	colour = colourcode(kgscore)
 
-    return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour, output7=weightpy)
+    return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour)
 
 @app.route("/products")
 def products():
