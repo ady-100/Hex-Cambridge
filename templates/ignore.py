@@ -1,14 +1,10 @@
-from bottle import Bottle, template, request
+from flask import Flask, render_template, request
 
-app = Bottle()
+app = Flask(__name__)
 
-@app.route('/', method="POST")
-def formhandler():
-    """Handle the form submission"""
+@app.route('/hello', methods=['GET', 'POST'])
+def hello():
+    return render_template('contact.html', say=request.form['email'], to=request.form['query'])
 
-    email = request.forms.get('email')
-    query = request.forms.get('query')
-
-    message = "Hello, thank you for your query: " + first + "  We will get back to you shortly at " + last + "."
-
-    return template("contact.html", message=message)
+if __name__ == "__main__":
+    app.run()
