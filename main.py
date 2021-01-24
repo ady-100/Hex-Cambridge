@@ -259,7 +259,7 @@ def data():
 		return "Red"
 	colour = colourcode(kgscore)
 
-    return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectiveness, output6=colour, output7=weightpy)
+    return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colour, output7=weightpy)
 
 @app.route("/products")
 def products():
