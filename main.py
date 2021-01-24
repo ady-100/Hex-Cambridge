@@ -207,23 +207,23 @@ def test_form():
     return render_template('test_form.html')
 
 def colourcode(value):
-	    if value > 10:
-		return "Green"
-	    elif value > 6:
-		return "Orange"
-	    else:
-		return "Red"
+    if value > 10:
+        return "Green"
+    elif value > 6:
+        return "Orange"
+    else:
+        return "Red"
 
 @app.route('/data', methods=['POST'])
 def data():
     # get data from the test HTML form, at URL /test_form, sending data to /data using the below python
     countrypy = request.form['country']
     material1py = request.form['material1']
-    percent1py = request.form['percent1']
+    percent1py = float(request.form['percent1'])
     material2py = request.form['material2']
-    percent2py = request.form['percent2']
-    costpy = request.form['cost']
-    weightpy = request.form['weight']
+    percent2py = float(request.form['percent2'])
+    costpy = float(request.form['cost'])
+    weightpy = float(request.form['weight'])
 
     with open('Countries_Data.csv', newline='') as csvfile:
         csvdata = csv.reader(csvfile, delimiter=',')
@@ -238,8 +238,9 @@ def data():
             mat_data[row[0]] = [float(row[1])]
 
     # Environmental Score
-
-    envmat = (((mat_data[material1py][0])*percent1py)+((mat_data[material2py][0])*percent2py)) * weightpy/100
+    
+    envmat1 = (((mat_data[str(material1py)][0])*percent1py)+((mat_data[str(material2py)][0])*percent2py))
+    envmat = envmat1*weightpy/100
     envco = weightpy * 150e-6 * (co_data[countrypy][4])
     Environ = envmat + envco 
 
@@ -256,7 +257,7 @@ def data():
     kgscore = Score/weightpy
 
     # Price per weight adjusted score
-    cost_effectivness = kgscore/costpy
+    cost_effectivness = kgscore/float(costpy)
 
     colour = colourcode(kgscore)
 
