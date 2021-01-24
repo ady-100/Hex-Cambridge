@@ -368,7 +368,22 @@ def map():
         username = item['username']
         address = item['latitude']
         meanscore = item['longitude']
-        an_item = dict(companyname = username, address = address, meanscore = meanscore)
+        colour = colourcode(meanscore)
+        
+        if colour == "Green":
+            green = True
+            red = False
+            orange = False
+        elif colour == "Red":
+            green = False
+            red = True
+            orange = False
+        elif colour == "Orange":
+            green = False
+            red = False
+            orange = True
+            
+        an_item = dict(companyname = username, address = address, meanscore = str(round(float(meanscore),1)), green = green, orange = orange, red = red)
         company_list.append(an_item)
         
     conn.commit()
