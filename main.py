@@ -8,7 +8,7 @@ import pymysql
 import csv
 from statistics import mean
 
-from helpers import apology, login_required, Algorithm, colourcode, FinancialAnalytics
+from helpers import apology, login_required, Algorithm, colourcode, FinancialAnalytics, EnvironAnalytics
 
 # Configure application
 app = Flask(__name__)
@@ -440,12 +440,12 @@ def analytics():
         companytransactions = c.fetchall()
         
         # EDIT THIS FUNCTION AND ITS OUTPUTS
-        #[mean, median, mode] = FinancialAnalytics(companytransactions)
+        [mean1, median1, mode1] = FinancialAnalytics(companytransactions)
         # Test data:
-        mean = 100
-        median = 110
-        mode = 50
-        financialdata = {'mean':str(mean), 'median':str(median), 'mode':str(mode)}
+        # mean = 100
+        # median = 110
+        # mode = 50
+        financialdata = {'mean':str(mean1), 'median':str(median1), 'mode':str(mode1)}
         
         # Generate boolean facts
         if float(financialdata['median'])>float(financialdata['mean']):
@@ -458,13 +458,51 @@ def analytics():
         booleandata = [MEDIANmean, MEANmedian]
             
         conn.commit()
-        conn.close()
         
         analyticsdata = {'financialdata':financialdata, 'environmentaldata':environmentaldata, 'booleandata':booleandata}
 	
-	#Enivonmental Analytics
-	env = EnvironAnalytics(product_list_display)
-	environdata = {'mean score':str(env[0]), 'mean distance':str(env[4]), 'mean CO2':str(env[9])}
+        #Enivonmental Analytics
+        conn = open_connection()
+        c = conn.cursor()
+    
+        username = session["username"]
+        c.execute("SELECT * FROM products WHERE username = %s", (username,))
+        productlist = c.fetchall()
+        product_list_display = []
+    
+        for item in productlist:
+            productname = item["productname"]
+            cost = item["cost"]
+            country = item["country"]
+            material1 = item["material1"]
+            percentage1 = item["percentage1"]
+            material2 = item["material2"]
+            percentage2 = item["percentage2"]
+            weight = item["weight"]
+            score = item["score"]
+            colour = colourcode(float(score)/float(weight))
+            
+            if colour == "Green":
+                green = True
+                red = False
+                orange = False
+            elif colour == "Red":
+                green = False
+                red = True
+                orange = False
+            elif colour == "Orange":
+                green = False
+                red = False
+                orange = True
+            
+            an_item = dict(productname = productname, cost= cost, country= country, material1= material1, percentage1= percentage1, material2= material2, percentage2= percentage2, weight= weight, score= score, colour= colour, green = green, red = red, orange = orange)
+            product_list_display.append(an_item)
+        
+        # Save commit
+        conn.commit()
+        conn.close()
+        env = EnvironAnalytics(product_list_display)
+        environdata = {'mean score':str(env[0]), 'mean distance':str(env[4]), 'mean CO2':str(env[9])}
         
         return render_template("analytics.html", content = analyticsdata)
 

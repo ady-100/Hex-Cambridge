@@ -9,6 +9,7 @@ Created on Sat Jan 23 19:00:14 2021
 from flask import redirect, render_template, request, session
 from functools import wraps
 import csv
+from statistics import mean, median, mode
 
 
 def apology(message, code=400):
@@ -87,14 +88,18 @@ def colourcode(value):
         return "Green"
     
 def FinancialAnalytics(transactions):
+    valuelist = []
     for item in transactions:
         username = item['username']
         value = item['value']
         datetime = item['date']
         tag = item['tag']
-
-        mean_value = round(mean(value))
-        med_value = round(median(value))
+        valuelist.append(value)
+    mean1 = mean(valuelist)
+    median1 = median(valuelist)
+    mode1 = mode(valuelist)
+    return [mean1, median1, mode1]
+        
     
 
 def EnvironAnalytics(productlistofdict):
