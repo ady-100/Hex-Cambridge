@@ -38,11 +38,11 @@ Below are the products you have saved
 			<td>{{item.material2}}</td>
             <td>{{item.percentage2}}</td>
 			<td>{{item.weight}}</td>
-			{% if green %}
+			{% if item.green %}
 				<td style = "background-color: green;" >{{item.score}}</td>
-			{% elif red %}
+			{% elif item.red %}
 				<td style = "background-color: red;" >{{item.score}}</td>
-			{% elif orange %}
+			{% elif item.orange %}
 				<td style = "background-color: orange;" >{{item.score}}</td>
 			{% endif %}
         </tr>
