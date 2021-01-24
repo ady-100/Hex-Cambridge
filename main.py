@@ -439,8 +439,11 @@ def analytics():
         companytransactions = c.fetchall()
         
         # EDIT THIS FUNCTION AND ITS OUTPUTS
-        [mean, median, mode] = FinancialAnalytics(companytransactions)
-        
+        #[mean, median, mode] = FinancialAnalytics(companytransactions)
+        # Test data:
+        mean = 100
+        median = 110
+        mode = 50
         financialdata = dict(mean = mean, median = median, mode = mode)
         analyticsdata.append(financialdata)
         
