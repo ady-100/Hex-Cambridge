@@ -283,22 +283,6 @@ def data():
 
     return render_template("data.html", output1=A[0], output2=A[1], output3=A[2], output4=A[3], output5=A[4], output6=colourimg)
 
-@app.route('/dataadd', methods=['POST'])
-def dataadd():
-    # get data from the test HTML form, at URL /productadd, sending data to /dataadd using the below python
-    pronamepy = request.form['proname']
-    countrypy = request.form['country']
-    material1py = request.form['material1']
-    percent1py = float(request.form['percent1'])
-    material2py = request.form['material2']
-    percent2py = float(request.form['percent2'])
-    costpy = float(request.form['cost'])
-    weightpy = float(request.form['weight'])
-
-    A = Algorithm(countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy)
-
-    return render_template("dataadd.html", output1=A[0], output2=A[1], output3=A[2], output4=A[3], output5=A[4], output6=A[5], output7=pronamepy)
-
 
 @app.route("/products")
 def products():
