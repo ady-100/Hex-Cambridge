@@ -222,7 +222,7 @@ def data():
     percent1py = float(request.form['percent1'])
     material2py = request.form['material2']
     percent2py = float(request.form['percent2'])
-    costpy = request.form['cost']
+    costpy = float(request.form['cost'])
     weightpy = float(request.form['weight'])
 
     with open('Countries_Data.csv', newline='') as csvfile:
@@ -257,7 +257,7 @@ def data():
     kgscore = Score/weightpy
 
     # Price per weight adjusted score
-    cost_effectivness = kgscore/costpy
+    cost_effectivness = kgscore/float(costpy)
 
     colour = colourcode(kgscore)
 
