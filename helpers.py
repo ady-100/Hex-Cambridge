@@ -57,19 +57,19 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
     envmat1 = (((mat_data[str(material1)][0])*percent1)+((mat_data[str(material2)][0])*percent2))
     envmat = envmat1*weight/100
     envco = weight * 150e-6 * (co_data[country][4])
-    Environ = round(envmat + envco,2) 
+    Environ = round(envmat + envco,1) 
 
     # Ethical Score
 
     ethmat = 0
     ethco = weight*((0.5)*((co_data[country][0])/15)+(2/9)*((1-co_data[country][1]+co_data[country][2]+co_data[country][3])/100))*100
-    Ethical = round(ethmat + ethco,2)
+    Ethical = round(ethmat + ethco,1)
 
     # Final Score
-    Score = round(Environ + 150*weight/Ethical,2)
+    Score = round(Environ + 150*weight/Ethical,1)
 
     # Score per kg
-    kgscore = round(Score/weight,2)
+    kgscore = round(Score/weight,1)
 
     # Price per weight adjusted score
     real_cost = round(float(cost) + Environ * 0.04 + 10*weight/Ethical ,2)
