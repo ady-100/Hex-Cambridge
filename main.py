@@ -161,7 +161,7 @@ def register():
         password_hash = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
 
         # Add user to database
-        c.execute("INSERT INTO users ('username', 'hash') VALUES (?,?)", (username, password_hash))
+        c.execute("INSERT INTO users ('username', 'hash') VALUES (%s,%s)", (username, password_hash))
 
         # Save commit
         conn.commit()
@@ -185,7 +185,7 @@ def check():
     c = conn.cursor()
     
     username = request.args.get("username",'')
-    c.execute("SELECT * FROM users WHERE username = :name", name=username)
+    c.execute("SELECT * FROM users WHERE username = %s", (username,))
     rows = c.fetchall()
     
     # Save commit
