@@ -215,7 +215,7 @@ def data():
     percent12py = request.form['percent2']
     costpy = request.form['cost']
     weightpy = request.form['weight']
-    return render_template("data.html", output1=countrypy, output2=material1py, output3=percent1py, output4=material2py, output5=percent2py, output3=costpy, output4=weightpy)
+    return render_template("data.html", output1=countrypy, output2=material1py, output3=percent1py, output4=material2py, output5=percent2py, output6=costpy, output7=weightpy)
 
 @app.route("/products")
 def products():
