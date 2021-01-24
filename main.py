@@ -254,7 +254,10 @@ def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
 
 	    colour = colourcode(kgscore)
 	
-	return [Environ, Ethical, Score, kgscore, cost_effectivness, colour]
+	    Al = [Environ, Ethical, Score, kgscore, cost_effectivness, colour]
+		
+	    return Al
+
 
 
 @app.route('/data', methods=['POST'])
