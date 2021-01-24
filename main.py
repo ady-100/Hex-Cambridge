@@ -92,6 +92,7 @@ def login():
         username = request.form.get("username")
         c.execute("SELECT * FROM users WHERE username = %s", (username,))
         rows = c.fetchall()
+        session["username"] = username
         
         
         # Ensure username exists and password is correct
@@ -262,11 +263,12 @@ def data():
 
     colour = colourcode(kgscore)
 
-    if colour = "Green":
-	colourimg = "https://colourlex.com/wp-content/uploads/2015/01/Emerald_green_painted_swatch_Muntwyler-225-s.jpg"
-    elif colour = "Orange":
-	colourimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAA1BMVEX/XgA92nntAAAASElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AcUIAAFkqh/QAAAAAElFTkSuQmCC"
-    else colourimg = "https://professionals.tarkett.com/media/img/M/TH_3917011_3707003_3708011_3912011_3914011_800_800.jpg"
+    if colour == "Green":
+        colourimg = "https://colourlex.com/wp-content/uploads/2015/01/Emerald_green_painted_swatch_Muntwyler-225-s.jpg"
+    elif colour == "Orange":
+        colourimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAAA1BMVEX/XgA92nntAAAASElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AcUIAAFkqh/QAAAAAElFTkSuQmCC"
+    else:
+        colourimg = "https://professionals.tarkett.com/media/img/M/TH_3917011_3707003_3708011_3912011_3914011_800_800.jpg"
 
     return render_template("data.html", output1=Environ, output2=Ethical, output3=Score, output4=kgscore, output5=cost_effectivness, output6=colourimg)
 
@@ -323,8 +325,35 @@ def dataadd():
 
 @app.route("/products")
 def products():
-    return render_template("products.html")
+    """Show list of products"""
     
+    conn = open_connection()
+    c = conn.cursor()
+    
+    username = session["username"]
+    c.execute("SELECT * FROM products WHERE username = %s", (username,))
+    productlist = c.fetchall()
+    product_list_display = []
+    
+    for item in productlist:
+        productname = item["productname"]
+        cost = item["cost"]
+        country = item["country"]
+        material1 = item["material1"]
+        percentage1 = item["percentage1"]
+        material2 = item["material2"]
+        percentage2 = item["percentage2"]
+        weight = item["weight"]
+        score = item["score"]
+        
+        product_list_display.append({'productname': productname, 'cost': cost, 'country': country, 'material1': material1, 'percentage1': percentage1, 'material2': material2, 'percentage2': percentage2, 'weight': weight, 'score': score})
+        
+    # Save commit
+    conn.commit()
+    conn.close()
+    
+    return render_template("products.html", product_list_display = product_list_display)
+
 @app.route("/productadd")
 def productadd():
     return render_template('productadd.html')
