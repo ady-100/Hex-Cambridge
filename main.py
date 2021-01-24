@@ -418,7 +418,7 @@ def analytics():
     else:
         
         # Initialise
-        analytics_data = []
+        analyticsdata = []
         conn = open_connection()
         c = conn.cursor()
         
@@ -431,18 +431,34 @@ def analytics():
             username = item['username']
             address = item['latitude']
             meanscore = item['longitude']
-            
+        environmentaldata = dict(meanscore = meanscore)
+        analyticsdata.append(environmentaldata)
+        
         # Receive analytics data
         c.execute("SELECT * FROM transactions WHERE username = %s", (username,))
         companytransactions = c.fetchall()
         
         # EDIT THIS FUNCTION AND ITS OUTPUTS
-        financedata = FinancialAnalytics(companytransactions)
+        [mean, median, mode] = FinancialAnalytics(companytransactions)
+        
+        financialdata = dict(mean = mean, median = median, mode = mode)
+        analyticsdata.append(financialdata)
+        
+        # Generate boolean facts
+        if financialdata.median>financialdata.mean:
+            MEDIANmean = True
+            MEANmedian = False
+        else:
+            MEANmedian = True
+            MEDIANmean = False
+        
+        booleandata = dict(MEDIANmean = MEDIANmean, MEANmedian = MEANmedian)
+        analyticsdata.append(booleandata)
             
         conn.commit()
         conn.close()
         
-        return render_template("analytics.html")
+        return render_template("analytics.html", analyticsdata)
 
 
 if __name__ == '__main__':

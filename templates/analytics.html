@@ -15,9 +15,33 @@
 
 <h3> Finance </h3>
 
-<p>
-    In finance, you will find data such as.....
-</p>
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th scope="col">Mean Transaction</th>
+			<th scope="col">Median Transaction</th>
+			<th scope="col">Mode Transaction</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in analyticsdata[1] %}
+			<tr>
+			<td>{{item.mean}}</td>
+			<td>{{item.median}}</td>
+			<td>{{item.mode}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p> What this means: </p>
+
+<ul>
+{% if analyticsdata[2][MEDIANmean] %}
+	<li>Median is greater than Mean. This means your shop is operating well.</li>
+{% elif analyticsdata[2][meanMEDIAN %}
+  <li>Mean is greater than Median. This means you have a lot of small transactions, with a few customers spending a lot of money. Try to reduce the price of your more expensive items, to encourage the smaller customers to buy them.</li>
+</ul>
 
 
 <h3> Environmental </h3>
