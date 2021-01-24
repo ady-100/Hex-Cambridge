@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Finding a Local Business
+    Find a Local Business
 {% endblock %}
 
 {% block main %}
-<h1> Finding a Local Business </h1>
+<h1> Find a Local Business </h1>
 
 <p>
 
@@ -25,6 +25,7 @@ Have a look round for your local businesses - and see if they're featured on thi
       <tr>
           <th scope="col">Company Name</th>
           <th scope="col">Company Address</th>
+		  <th scope="col">Mean Score</th>
       </tr>
     </thead>
   <tbody>
@@ -32,6 +33,15 @@ Have a look round for your local businesses - and see if they're featured on thi
       <tr>
           <td>{{item.companyname}}</td>
           <td>{{item.address}}</td>
+			{% if item.green %}
+				<td style = "background-color: green;color:white;" >{{item.score}}</td>
+			{% elif item.red %}
+				<td style = "background-color: red;color:white;" >{{item.score}}</td>
+			{% elif item.orange %}
+				<td style = "background-color: orange;color:white;" >{{item.score}}</td>
+			{% else %}
+				<td>{{item.score}}</td>
+			{% endif %}
       </tr>
       {% endfor %}
   </tbody>  

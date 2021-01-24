@@ -6,8 +6,9 @@ import sqlite3
 import os
 import pymysql
 import csv
+from statistics import mean
 
-from helpers import apology, login_required
+from helpers import apology, login_required, Algorithm, colourcode, FinancialAnalytics
 
 # Configure application
 app = Flask(__name__)
@@ -63,6 +64,31 @@ def root():
 def about():
     """Show about us section"""
     return render_template('about.html')
+
+def meanscoreupdate(c, conn, returntrue):
+    
+    # Query database for username
+    username = session['username']
+    c.execute("SELECT * FROM products WHERE username = %s", (username,))
+
+    productlist = c.fetchall()
+    weightedscore = []
+    
+    for item in productlist:
+        weight = item["weight"]
+        score = item["score"]
+        weightedscore.append(float(score)/float(weight))
+    meanscore = mean(weightedscore)
+    
+    c.execute("UPDATE locations SET longitude = %s WHERE username = %s",(meanscore, username))
+    conn.commit()
+    
+    if returntrue:
+        return meanscore
+    
+    
+    
+    
  
 # Login
 @app.route("/login", methods=["GET", "POST"])
@@ -205,61 +231,12 @@ def check():
         return jsonify(False), 400
     else:
         return jsonify(True), 200
-    
 
-	
 	
 @app.route('/test_form')
 def test_form():
     return render_template('test_form.html')
-
-def colourcode(value):
-    if value > 50:
-        return "Red"
-    elif value > 40:
-        return "Orange"
-    else:
-        return "Green"
-
-def Algorithm(country, material1, percent1, material2, percent2, cost, weight):
-    with open('Countries_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        co_data = {}
-        for row in csvdata:
-            co_data[row[0]] = [float(row[1]),float(row[2]),float(row[3]),float(row[4]),float(row[5])]
-
-    with open('Materials_Data.csv', newline='') as csvfile:
-        csvdata = csv.reader(csvfile, delimiter=',')
-        mat_data = {}
-        for row in csvdata:
-            mat_data[row[0]] = [float(row[1])]
-            
-    # Environmental Score
-    envmat1 = (((mat_data[str(material1)][0])*percent1)+((mat_data[str(material2)][0])*percent2))
-    envmat = envmat1*weight/100
-    envco = weight * 150e-6 * (co_data[country][4])
-    Environ = round(envmat + envco,2) 
-
-    # Ethical Score
-
-    ethmat = 0
-    ethco = weight*((0.5)*((co_data[country][0])/15)+(2/9)*((1-co_data[country][1]+co_data[country][2]+co_data[country][3])/100))*100
-    Ethical = round(ethmat + ethco,2)
-
-    # Final Score
-    Score = round(Environ + 200*weight/Ethical,2)
-
-    # Score per kg
-    kgscore = round(Score/weight,2)
-
-    # Price per weight adjusted score
-    real_cost = round(float(cost) + Environ * 0.04 + 5*weight/Ethical ,2)
-    colour = colourcode(kgscore)
-    Al = [Environ, Ethical, Score, kgscore, real_cost, colour]
     
-    return Al
-
-
 
 @app.route('/data', methods=['POST'])
 def data():
@@ -282,22 +259,6 @@ def data():
         colourimg = "https://professionals.tarkett.com/media/img/M/TH_3917011_3707003_3708011_3912011_3914011_800_800.jpg"
 
     return render_template("data.html", output1=A[0], output2=A[1], output3=A[2], output4=A[3], output5=A[4], output6=colourimg)
-
-@app.route('/dataadd', methods=['POST'])
-def dataadd():
-    # get data from the test HTML form, at URL /productadd, sending data to /dataadd using the below python
-    pronamepy = request.form['proname']
-    countrypy = request.form['country']
-    material1py = request.form['material1']
-    percent1py = float(request.form['percent1'])
-    material2py = request.form['material2']
-    percent2py = float(request.form['percent2'])
-    costpy = float(request.form['cost'])
-    weightpy = float(request.form['weight'])
-
-    A = Algorithm(countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy)
-
-    return render_template("dataadd.html", output1=A[0], output2=A[1], output3=A[2], output4=A[3], output5=A[4], output6=A[5], output7=pronamepy)
 
 
 @app.route("/products")
@@ -368,9 +329,12 @@ def productadd():
         # Add user to database
         username = session["username"]
         c.execute("INSERT INTO products (username, productname, country, material1, percentage1, material2, percentage2, cost, weight, score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (username, productname, countrypy, material1py, percent1py, material2py, percent2py, costpy, weightpy, A[2]))
-        
-        # Save commit
         conn.commit()
+        
+        # Update meanscore
+        meanscoreupdate(c,conn, False)
+        # Save commit
+
         conn.close()
         
         # Redirect user to login page if username is valid
@@ -399,17 +363,86 @@ def map():
     productlist = c.fetchall()
     company_list = []
     
+    
     for item in productlist:
         username = item['username']
         address = item['latitude']
-        an_item = dict(companyname = username, address = address)
+        meanscore = item['longitude']
+        colour = colourcode(float(meanscore))
+        
+        if colour == "Green":
+            green = True
+            red = False
+            orange = False
+        elif colour == "Red":
+            green = False
+            red = True
+            orange = False
+        elif colour == "Orange":
+            green = False
+            red = False
+            orange = True
+            
+        an_item = dict(companyname = username, address = address, score = str(round(float(meanscore),1)), green = green, orange = orange, red = red)
         company_list.append(an_item)
         
-    # Save commit
     conn.commit()
     conn.close()
+        
     
     return render_template("map.html", company_list = company_list)
+
+@app.route("/analytics")
+def analytics():
+    
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        
+        # Setup database entry
+        conn = open_connection()
+        c = conn.cursor()
+        username = session['username']
+        
+        # Receive transaction data (FILL OUT WITH FORMS AND UPLOADS)
+        #value = 
+        #date = 
+        #tag = 
+        
+        # Save transaction data (CAN LOOP)
+        #c.execute("INSERT INTO transactions (username, value, date, tag) VALUES (%s,%s,%s,%s)", (username, value, date, tag))
+        
+        # Save commit
+        conn.commit()
+        conn.close()
+        
+    else:
+        
+        # Initialise
+        analytics_data = []
+        conn = open_connection()
+        c = conn.cursor()
+        
+        # Retrieve mean ShopGreen score
+        username = session['username']
+        c.execute("SELECT * FROM locations WHERE username = %s", (username,))
+        companydetails = c.fetchall()
+        
+        for item in companydetails:
+            username = item['username']
+            address = item['latitude']
+            meanscore = item['longitude']
+            
+        # Receive analytics data
+        c.execute("SELECT * FROM transactions WHERE username = %s", (username,))
+        companytransactions = c.fetchall()
+        
+        # EDIT THIS FUNCTION AND ITS OUTPUTS
+        financedata = FinancialAnalytics(companytransactions)
+            
+        conn.commit()
+        conn.close()
+        
+        return render_template("analytics.html")
 
 
 if __name__ == '__main__':
