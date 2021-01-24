@@ -336,15 +336,15 @@ def products():
     product_list_display = []
     
     for item in productlist:
-        productname = item[1]
-        cost = item[7]
-        country = item[2]
-        material1 = item[3]
-        percentage1 = item[4]
-        material2 = item[5]
-        percentage2 = item[6]
-        weight = item[8]
-        score = item[9]
+        productname = item["productname"]
+        cost = item["cost"]
+        country = item["country"]
+        material1 = item["material1"]
+        percentage1 = item["percentage1"]
+        material2 = item["material2"]
+        percentage2 = item["percentage2"]
+        weight = item["weight"]
+        score = item["score"]
         
         product_list_display.append({'productname': productname, 'cost': cost, 'country': country, 'material1': material1, 'percentage1': percentage1, 'material2': material2, 'percentage2': percentage2, 'weight': weight, 'score': score})
         
