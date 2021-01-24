@@ -19,14 +19,14 @@ the impact per kg of material, so you may compare differnet garments in your sho
 </p>
 
 <p>
-  <form action="/productadd" method="post">
-    
-    Name of Product: <br><input type="text" name="productname"><br>
-    </p>
-    <p> 
-    Source country: <br>
-    
-    <select name="country">
+   <form action="/data" method="post">
+    <br>
+       <div class="form-group">
+    <input class="form-control" type="text" name="proname" placeholder="Product Name">
+    </div>
+    <div class="form-group">
+    <select class="form-control" name="country">
+    			<option value="" disabled selected>Source country</option>
                 <option value="Australia">Australia</option>
                 <option value="Bangladesh">Bangladesh</option>
                 <option value="China">China</option>
@@ -44,13 +44,15 @@ the impact per kg of material, so you may compare differnet garments in your sho
                 <option value="United Kingdom">United Kingdom</option>
                 <option value="USA">United States of America</option>
                 <option value="Vietnam">Vietnam</option>
-                <option value="Western Europe">Western Europe</option>
-            </select><br>
-    </p>
-    <p>
-    Material 1: <br>
-
-     <select name="material1">
+                <option value="Western Europe">Western Europe</option>     
+            </select>
+            </div>
+    
+    
+    
+    <div class="form-group">
+     <select class="form-control" name="material1" placeholder="Material 1">
+     			<option value="" disabled selected>Material 1</option>
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
                 <option value="Flax">Flax</option>
@@ -60,15 +62,16 @@ the impact per kg of material, so you may compare differnet garments in your sho
                 <option value="Polyamide">Polyamide</option>
                 <option value="Polyurethane">Polyurethane/Polypropylene</option>
                 <option value="Viscose">Viscose</option>
-            </select><br>
-    </p>
-    <p>
-    Percentage material 1: <br><input type="text" name="percent1"><br>
-    </p>
-    <p>
-    Material 2: <br>
-   
-     <select name="material2">
+            </select>
+	</div>
+    
+    <div class="form-group">
+    <input class="form-control" type="text" name="percent1" placeholder="Percentage material 1">
+    </div>
+    
+    <div class="form-group">
+     <select class="form-control" name="material2">
+     			<option value="" disabled selected>Material 2</option>
                 <option value="Cotton">Cotton</option>
                 <option value="Wool">Wool</option>
                 <option value="Flax">Flax</option>
@@ -78,19 +81,20 @@ the impact per kg of material, so you may compare differnet garments in your sho
                 <option value="Polyamide">Polyamide</option>
                 <option value="Polyurethane">Polyurethane/Polypropylene</option>
                 <option value="Viscose">Viscose</option>
-            </select><br>
-    </p>
-    <p>
-    Percentage material 2: <br><input type="text" name="percent2"><br>
-    </p>
-    <p>    
-    Cost/£: <br><input type="text" name="cost"><br>
-    </p>
-    <p>
-    Weight/kg: <br><input type="text" name="weight"><br>
-    </p>
-    <p>    
+            </select>
+    </div>
+    <div class="form-group">
+    <input class="form-control" type="text" name="percent2" placeholder="Percentage material 2">
+    </div>
+    <div class="form-group">    
+    <input class="form-control" type="text" name="cost" placeholder="Cost/£">
+    </div>
+    <div class="form-group">
+    <input class="form-control" type="text" name="weight" placeholder="Weight/kg">
+    </div>    
+    <div style="text-align.center">
     <input type="submit" value="Submit">
+    </div>
 </form>
 
 </p>
