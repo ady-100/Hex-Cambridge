@@ -95,6 +95,9 @@ def FinancialAnalytics(transactions):
         datetime = item['date']
         tag = item['tag']
         valuelist.append(value)
+    mean1 = 100
+    median1 = 90
+    mode1 = 70
     mean1 = mean(valuelist)
     median1 = median(valuelist)
     mode1 = mode(valuelist)
