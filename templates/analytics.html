@@ -35,9 +35,9 @@
 <p> What this means: </p>
 
 <ul>
-{% if [content.booleandata][0] %}
+{% if [content]['booleandata'][0] %}
 	<li>Median is greater than Mean. This means your shop is operating well.</li>
-{% elif [content.booleandata][1] %}
+{% elif [content][booleandata][1] %}
   <li>Mean is greater than Median. This means you have a lot of small transactions, with a few customers spending a lot of money. Try to reduce the price of your more expensive items, to encourage the smaller customers to buy them.</li>
 {% endif %}
 </ul>
